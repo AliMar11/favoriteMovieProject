@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSMutableArray *collectionViewTreats;
 @property (assign, nonatomic) int viewTrailing;
 @property (assign, nonatomic) int viewLeadingAnchor;
-@property (nonatomic) UICollectionView *collectionView;
+//@property (nonatomic) UICollectionView *collectionView;
 
 @end
 
@@ -26,11 +26,28 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     [super viewDidLoad];
     
+    ///////// JOEL'S NOTES ////////////
+    
+    // literal syntax for NSMutableArray
+//    self.collectionViewTreats = [@[@"8bit hearts", @"colorTriangles", @"google-classic", @"cool cloud", @"trust computer", @"Yellow-Funny-Typography-s"] mutableCopy];
+    
+    ///////// ^^^^^^^^^^^^ ////////////
+    
     self.collectionViewTreats = [[NSMutableArray alloc]initWithObjects:@"8bit hearts", @"colorTriangles", @"google-classic", @"cool cloud", @"trust computer", @"Yellow-Funny-Typography-s", nil];
+    
+    ///////// JOEL'S NOTES ////////////
+    // refactor searchbar implementation. try without initWithFrame
     
     //int *viewTrailing = self.view.trailingAnchor;
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame: CGRectMake(self.viewTrailing, self.viewLeadingAnchor, 412, 75)];
+    
+    ///////// ^^^^^^^^^^^^ ////////////
+    
+    ///////// JOEL'S NOTES ////////////
+    // Get rid of this:
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    ///////// ^^^^^^^^^^^^ ////////////
+    
     
     self.searchBar.delegate = self;
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
@@ -38,47 +55,85 @@ static NSString * const reuseIdentifier = @"Cell";
     self.searchBar.tintColor = [UIColor blueColor];
     self.searchBar.barTintColor = [UIColor lightGrayColor];
     self.searchBar.showsCancelButton = YES;
+    
+    ///////// JOEL'S NOTES ////////////
+    // try adding as an item to the title view:
     [self.navigationController.navigationBar addSubview: searchBar];
- 
+    ///////// ^^^^^^^^^^^^ ////////////
+    
 //    [self.searchBar.centerYAnchor constraintEqualToAnchor: self.view.centerYAnchor].active = YES;
 //    [self.searchBar.centerXAnchor constraintEqualToAnchor: self.view.centerXAnchor].active = YES;
     
+    ///////// JOEL'S NOTES ////////////
+    // lose this and try using the flow layout methods below:
     self.collectionView.contentInset = UIEdgeInsetsMake(self.searchBar.frame.size.height, 5, 0, 5);
     self.collectionView.contentOffset = CGPointMake(0, -self.searchBar.frame.size.height);
+    ///////// ^^^^^^^^^^^^ ////////////
     
-    
+    ///////// JOEL'S NOTES ////////////
+    // Get rid of this:
     self.view = [[UIView alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
-    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame: self.view.frame collectionViewLayout:layout];
     [self.collectionView setDataSource: self];
     [self.collectionView setDelegate: self];
     [self.collectionView setBackgroundColor:[UIColor yellowColor]];
+    ///////// ^^^^^^^^^^^^ ////////////
+    
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
- 
+    
+    ///////// JOEL'S NOTES ////////////
+    // Get rid of this:
     [self.view addSubview: self.collectionView];
+    ///////// ^^^^^^^^^^^^ ////////////
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark Collection View Layout
+
+
+// ITEM SIZE
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat cellLeg = (self.collectionView.frame.size.width/2) - 5;
+    return CGSizeMake(cellLeg,cellLeg);
 }
 
-/*
-#pragma mark - Navigation
+// COLLECTION VIEW EDGE INSETS
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+//                        layout:(UICollectionViewLayout *)collectionViewLayout
+//        insetForSectionAtIndex:(NSInteger)section {
+//    
+//    
+//}
+
+// COLLECTION VIEW MINIMUM LINE SPACING
+
+//- (CGFloat)collectionView:(UICollectionView *)collectionView
+//                   layout:(UICollectionViewLayout *)collectionViewLayout
+//minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+//    
+//}
+
+// COLLECTION VIEW MINIMUM INTERITEM SPACING
+
+//- (CGFloat)collectionView:(UICollectionView *)collectionView
+//                   layout:(UICollectionViewLayout *)collectionViewLayout
+//minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+//    
+//}
+
+
+
+
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -96,22 +151,36 @@ static NSString * const reuseIdentifier = @"Cell";
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
                                                                            forIndexPath:indexPath];
-    
+    ///////// JOEL'S NOTES ////////////
+    // Get rid of this:
     UIImageView *testImages = (UIImageView *)[cell viewWithTag:100];
-    testImages.image = [UIImage imageNamed:[_collectionViewTreats objectAtIndex:indexPath.row]];
+    testImages.image = [UIImage imageNamed:[self.collectionViewTreats objectAtIndex:indexPath.row]];
     //cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
     [self.view addSubview:testImages];
+    ///////// ^^^^^^^^^^^^ ////////////
     
    // cell.backgroundView = [UIImage imageNamed:[testImages]];
-    cell.backgroundColor=[UIColor colorWithPatternImage: [UIImage imageNamed:[_collectionViewTreats objectAtIndex:indexPath.row]]];
+    cell.backgroundColor=[UIColor colorWithPatternImage: [UIImage imageNamed:[self.collectionViewTreats objectAtIndex:indexPath.row]]];
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat cellLeg = (self.collectionView.frame.size.width/2) - 5;
-    return CGSizeMake(cellLeg,cellLeg);
+
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
