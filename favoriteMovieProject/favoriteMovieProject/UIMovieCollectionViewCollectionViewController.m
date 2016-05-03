@@ -8,7 +8,13 @@
 
 #import "UIMovieCollectionViewCollectionViewController.h"
 
-@interface UIMovieCollectionViewCollectionViewController ()
+@interface UIMovieCollectionViewCollectionViewController () <UISearchBarDelegate>
+
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) NSMutableArray *collectionViewTreats;
+@property (assign, nonatomic) int viewTrailing;
+@property (assign, nonatomic) int viewLeadingAnchor;
+@property (nonatomic) UICollectionView *collectionView;
 
 @end
 
@@ -16,19 +22,50 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    self.collectionViewTreats = [[NSMutableArray alloc]initWithObjects:@"8bit hearts", @"colorTriangles", @"google-classic", @"cool cloud", @"trust computer", @"Yellow-Funny-Typography-s", nil];
+    
+    //int *viewTrailing = self.view.trailingAnchor;
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame: CGRectMake(self.viewTrailing, self.viewLeadingAnchor, 412, 75)];
+    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    self.searchBar.delegate = self;
+    self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    self.searchBar.placeholder = @"enter search keywords";
+    self.searchBar.tintColor = [UIColor blueColor];
+    self.searchBar.barTintColor = [UIColor lightGrayColor];
+    self.searchBar.showsCancelButton = YES;
+    [self.navigationController.navigationBar addSubview: searchBar];
+ 
+//    [self.searchBar.centerYAnchor constraintEqualToAnchor: self.view.centerYAnchor].active = YES;
+//    [self.searchBar.centerXAnchor constraintEqualToAnchor: self.view.centerXAnchor].active = YES;
+    
+    self.collectionView.contentInset = UIEdgeInsetsMake(self.searchBar.frame.size.height, 5, 0, 5);
+    self.collectionView.contentOffset = CGPointMake(0, -self.searchBar.frame.size.height);
+    
+    
+    self.view = [[UIView alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    self.collectionView = [[UICollectionView alloc] initWithFrame: self.view.frame collectionViewLayout:layout];
+    [self.collectionView setDataSource: self];
+    [self.collectionView setDelegate: self];
+    [self.collectionView setBackgroundColor:[UIColor yellowColor]];
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
+ 
+    [self.view addSubview: self.collectionView];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -45,24 +82,38 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark <UICollectionViewDataSource>
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return self.collectionViewTreats.count;
 }
 
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 6;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
+                                                                           forIndexPath:indexPath];
     
-    // Configure the cell
+    UIImageView *testImages = (UIImageView *)[cell viewWithTag:100];
+    testImages.image = [UIImage imageNamed:[_collectionViewTreats objectAtIndex:indexPath.row]];
+    //cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
+    [self.view addSubview:testImages];
     
+   // cell.backgroundView = [UIImage imageNamed:[testImages]];
+    cell.backgroundColor=[UIColor colorWithPatternImage: [UIImage imageNamed:[_collectionViewTreats objectAtIndex:indexPath.row]]];
     return cell;
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat cellLeg = (self.collectionView.frame.size.width/2) - 5;
+    return CGSizeMake(cellLeg,cellLeg);
+}
+
 
 #pragma mark <UICollectionViewDelegate>
 
