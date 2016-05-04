@@ -16,6 +16,7 @@
 		2B98CB021CD8010200F2781C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B98CB001CD8010200F2781C /* LaunchScreen.storyboard */; };
 		2B98CB0E1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB0D1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m */; };
 		2B98CB111CD8048300F2781C /* MovieTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB101CD8048300F2781C /* MovieTableViewController.m */; };
+		2B98CB141CD9D1CB00F2781C /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB131CD9D1CB00F2781C /* CollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		2B98CB0D1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIMovieCollectionViewCollectionViewController.m; sourceTree = "<group>"; };
 		2B98CB0F1CD8048300F2781C /* MovieTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTableViewController.h; sourceTree = "<group>"; };
 		2B98CB101CD8048300F2781C /* MovieTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewController.m; sourceTree = "<group>"; };
+		2B98CB121CD9D1CB00F2781C /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		2B98CB131CD9D1CB00F2781C /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				2B98CAF61CD8010200F2781C /* ViewController.m */,
 				2B98CB0C1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.h */,
 				2B98CB0D1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m */,
+				2B98CB121CD9D1CB00F2781C /* CollectionViewCell.h */,
+				2B98CB131CD9D1CB00F2781C /* CollectionViewCell.m */,
 				2B98CB0F1CD8048300F2781C /* MovieTableViewController.h */,
 				2B98CB101CD8048300F2781C /* MovieTableViewController.m */,
 				2B98CAF81CD8010200F2781C /* Main.storyboard */,
@@ -167,6 +172,7 @@
 				2B98CB111CD8048300F2781C /* MovieTableViewController.m in Sources */,
 				2B98CAF71CD8010200F2781C /* ViewController.m in Sources */,
 				2B98CAF41CD8010200F2781C /* AppDelegate.m in Sources */,
+				2B98CB141CD9D1CB00F2781C /* CollectionViewCell.m in Sources */,
 				2B98CAF11CD8010200F2781C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +322,7 @@
 				2B98CB081CD8010200F2781C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
