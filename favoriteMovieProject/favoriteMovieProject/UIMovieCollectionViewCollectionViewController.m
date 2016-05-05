@@ -24,11 +24,9 @@ static NSString * const reuseIdentifier = @"awesomeCell";
 {
     [super viewDidLoad];
     
-    self.collectionViewTreats = [@[@"8bit hearts", @"colorTriangles", @"google-classic", @"cool cloud", @"trust computer", @"Yellow-Funny-Typography-s"] mutableCopy];
+    self.collectionViewTreats = [@[@"colorPiant", @"colorAbstract", @"google-classic",@"yoda troubles", @"colorImplosion", @"Be-Original-s", @"Yellow-Funny-Typography-s", @"abstract colors", @"colorPatterns", @"colorPiant"] mutableCopy];
     
     self.searchBar = [[UISearchBar alloc] init];
-    self.searchBar.autoresizingMask = YES;  //idk if this is what I want.
-    
     self.searchBar.delegate = self;
     self.navigationItem.titleView = self.searchBar;
     
@@ -38,32 +36,61 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     self.searchBar.barTintColor = [UIColor lightGrayColor];
     self.searchBar.showsCancelButton = YES;
     
- 
- 
-    //self.collectionView.contentInset = UIEdgeInsetsMake(self.searchBar.frame.size.height, 5, 0, 5);
-    //self.collectionView.contentOffset = CGPointMake(0, -self.searchBar.frame.size.height);
-    
-    
     [self.collectionView setDataSource: self];
     [self.collectionView setDelegate: self];
-    [self.collectionView setBackgroundColor:[UIColor yellowColor]];
-
     
+    UIView *backgroundViewForCollectionView=[[UIView alloc]initWithFrame:CGRectMake(200, 200, 400, 600)];
+    [backgroundViewForCollectionView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"colorTriangles"]]];
+    
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurEffectView.frame = self.view.bounds;
+    blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    [backgroundViewForCollectionView addSubview:blurEffectView];
+    [self.collectionView setBackgroundView:backgroundViewForCollectionView];
+ 
+
+/*
+//------------------------------------
+    UIView * collectionViewBRV = [[UIView alloc] initWithFrame:CGRectMake(200,
+                                                                          200,
+                                                                          self.collectionView.contentSize.width,                                                                         self.collectionView.contentSize.height)];
+    
+        collectionViewBRV.translatesAutoresizingMaskIntoConstraints = NO;
+        [collectionViewBRV.widthAnchor constraintLessThanOrEqualToAnchor:self.collectionView.widthAnchor].active = YES;
+        [collectionViewBRV.heightAnchor constraintLessThanOrEqualToAnchor:self.collectionView.heightAnchor].active = YES;
+        [collectionViewBRV.centerXAnchor constraintLessThanOrEqualToAnchor:self.collectionView.centerXAnchor].active = YES;
+        [collectionViewBRV.centerYAnchor constraintLessThanOrEqualToAnchor:self.collectionView.centerYAnchor].active = YES;
+ 
+    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"colorTriangles"]];
+    
+    imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [imageView.widthAnchor constraintLessThanOrEqualToAnchor: collectionViewBRV.widthAnchor].active = YES;
+    [imageView.heightAnchor constraintLessThanOrEqualToAnchor: collectionViewBRV.heightAnchor].active = YES;
+    [imageView.centerXAnchor constraintLessThanOrEqualToAnchor: collectionViewBRV.centerXAnchor].active = YES;
+    [imageView.centerYAnchor constraintLessThanOrEqualToAnchor: collectionViewBRV.centerYAnchor].active = YES;
+    
+    [collectionViewBRV addSubview: imageView];
+    //[self.collectionView addSubview: collectionViewBRV];
+    self.collectionView.backgroundView = collectionViewBRV;
+//------------------------------------
+*/
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class]
             forCellWithReuseIdentifier: @"awesomeCell"];
- 
 }
 
 ////// ITEM SIZE of items inside collection view
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat cellLeg = (self.collectionView.frame.size.width/3) -2;
-    return CGSizeMake(cellLeg, cellLeg);
+    CGFloat cellLeg = (self.collectionView.frame.size.width/2.5) -2;
+    return CGSizeMake(cellLeg, cellLeg*1.5);
 }
 
 //// COLLECTION VIEW EDGE INSETS(spacing all around each view in collection)
@@ -71,7 +98,7 @@ static NSString * const reuseIdentifier = @"awesomeCell";
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(30, 30, 30, 30);
+    return UIEdgeInsetsMake(10, 20, 10, 20);
 }
 
 //// COLLECTION VIEW MINIMUM LINE SPACING (Horizontal spacing betweet top and bottom)
@@ -79,15 +106,15 @@ static NSString * const reuseIdentifier = @"awesomeCell";
                    layout:(UICollectionViewLayout *)collectionViewLayout
 minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 30;
+    return 20;
 }
 
-// COLLECTION VIEW MINIMUM INTERITEM SPACING
+// COLLECTION VIEW MINIMUM INTERITEM SPACING (between views within collection)
 - (CGFloat)collectionView:(UICollectionView *)collectionView
                    layout:(UICollectionViewLayout *)collectionViewLayout
 minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 30;
+    return 10;
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,22 +136,30 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 6;
+    return self.collectionViewTreats.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"awesomeCell" forIndexPath:indexPath];
     
-    //Why doesn't this work?
-   // cell.bounds.size.height =CGRectGetWidth(40);
+    UIImageView *movieImageView = [[UIImageView alloc]init];
+    movieImageView.image = [UIImage imageNamed: [self.collectionViewTreats objectAtIndex: indexPath.row]];
+
     
-    cell.backgroundColor= [UIColor colorWithPatternImage: [UIImage imageNamed:[self.collectionViewTreats objectAtIndex:indexPath.row]]];
+    [cell.contentView addSubview:movieImageView];
+   // [movieImageView setContentMode: UIViewContentModeBottom];
+
+    movieImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [movieImageView.heightAnchor constraintEqualToAnchor:cell.contentView.heightAnchor].active = YES;
+    [movieImageView.widthAnchor constraintEqualToAnchor:cell.contentView.widthAnchor].active = YES;
+    [movieImageView.centerXAnchor constraintEqualToAnchor:cell.contentView.centerXAnchor].active =YES;
+    [movieImageView.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor].active =YES;
     
     return cell;
 }
