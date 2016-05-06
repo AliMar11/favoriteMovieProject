@@ -173,6 +173,22 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     return cell;
 }
 
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+          viewForSupplementaryElementOfKind:(NSString *)kind
+                                atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *reusableView= nil;
+   
+    if (kind == UICollectionElementKindSectionFooter)
+    {
+        UICollectionReusableView *footerView = [collectionView dequeueReusableCellWithReuseIdentifier: @"footerView" forIndexPath: indexPath];
+        
+        reusableView = footerView;
+    }
+    
+    return reusableView;
+}
+
 
 //in order to search for a movie from API
 /*

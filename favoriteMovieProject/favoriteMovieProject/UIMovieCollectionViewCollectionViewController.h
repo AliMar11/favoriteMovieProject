@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *collectionViewTreats;
-@property (weak, nonatomic) IBOutlet UIImageView *collectionImageView;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionImageView;
+
 
 @end
