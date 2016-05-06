@@ -24,7 +24,7 @@ static NSString * const reuseIdentifier = @"awesomeCell";
 {
     [super viewDidLoad];
     
-    self.collectionViewTreats = [@[@"colorPiant", @"colorAbstract", @"google-classic",@"yoda troubles", @"colorImplosion", @"Be-Original-s", @"Yellow-Funny-Typography-s", @"abstract colors", @"colorPatterns", @"colorPiant"] mutableCopy];
+    self.collectionViewTreats = [@[@"colorPiant", @"colorAbstract", @"google-classic",@"yoda troubles", @"colorImplosion", @"release-the-wee-kraken.jpg", @"Yellow-Funny-Typography-s", @"abstract colors", @"colorPatterns", @"colorTriangles"] mutableCopy];
     
     self.searchBar = [[UISearchBar alloc] init];
     self.searchBar.delegate = self;
@@ -150,16 +150,16 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     
     UIImageView *movieImageView = [[UIImageView alloc]init];
     movieImageView.image = [UIImage imageNamed: [self.collectionViewTreats objectAtIndex: indexPath.row]];
-
     
     [cell.contentView addSubview:movieImageView];
-   // [movieImageView setContentMode: UIViewContentModeBottom];
 
     movieImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [movieImageView.heightAnchor constraintEqualToAnchor:cell.contentView.heightAnchor].active = YES;
     [movieImageView.widthAnchor constraintEqualToAnchor:cell.contentView.widthAnchor].active = YES;
     [movieImageView.centerXAnchor constraintEqualToAnchor:cell.contentView.centerXAnchor].active =YES;
     [movieImageView.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor].active =YES;
+    [movieImageView setContentMode: UIViewContentModeScaleToFill];
+
     
     return cell;
 }
