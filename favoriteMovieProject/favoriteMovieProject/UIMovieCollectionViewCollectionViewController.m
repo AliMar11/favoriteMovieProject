@@ -8,11 +8,7 @@
 
 #import "UIMovieCollectionViewCollectionViewController.h"
 
-@interface UIMovieCollectionViewCollectionViewController () <UISearchBarDelegate>
-
-@property (nonatomic, strong) UISearchBar *searchBar;
-@property (nonatomic, strong) NSMutableArray *collectionViewTreats;
-@property (weak, nonatomic) IBOutlet UIImageView *collectionImageView;
+@interface UIMovieCollectionViewCollectionViewController ()
 
 @end
 
@@ -24,32 +20,45 @@ static NSString * const reuseIdentifier = @"awesomeCell";
 {
     [super viewDidLoad];
     
-    self.collectionViewTreats = [@[@"colorPiant", @"colorAbstract", @"google-classic",@"yoda troubles", @"colorImplosion", @"release-the-wee-kraken.jpg", @"Yellow-Funny-Typography-s", @"abstract colors", @"colorPatterns", @"colorTriangles"] mutableCopy];
+    self.collectionViewTreats = [@[@"colorPiant",
+                                   @"colorAbstract",
+                                   @"google-classic",
+                                   @"yoda troubles",
+                                   @"colorImplosion",
+                                   @"release-the-wee-kraken.jpg",
+                                   @"Yellow-Funny-Typography-s",
+                                   @"abstract colors",
+                                   @"colorPatterns",
+                                   @"colorTriangles"] mutableCopy];
     
     self.searchBar = [[UISearchBar alloc] init];
     self.searchBar.delegate = self;
     self.navigationItem.titleView = self.searchBar;
+    [self.searchBar.leftAnchor constraintEqualToAnchor: self.navigationController.navigationBar.leftAnchor constant:15].active =YES;
+    [self.searchBar.rightAnchor constraintEqualToAnchor: self.navigationController.navigationBar.rightAnchor constant:15].active =YES;
+    
     
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchBar.placeholder = @"enter search keyword(s)";
     self.searchBar.tintColor = [UIColor blueColor];
     self.searchBar.barTintColor = [UIColor lightGrayColor];
-    self.searchBar.showsCancelButton = YES;
+    //self.searchBar.showsCancelButton = YES;
     
     [self.collectionView setDataSource: self];
     [self.collectionView setDelegate: self];
     
-    UIView *backgroundViewForCollectionView=[[UIView alloc]initWithFrame:CGRectMake(200, 200, 400, 600)];
-    [backgroundViewForCollectionView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"colorTriangles"]]];
+    UIView *backgroundViewForCollectionView=[[UIView alloc]init];
+    [backgroundViewForCollectionView setBackgroundColor:[UIColor colorWithPatternImage:
+                                                         [UIImage imageNamed:@"colorTriangles"]]];
     
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect: blurEffect];
     blurEffectView.frame = self.view.bounds;
     blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    [backgroundViewForCollectionView addSubview:blurEffectView];
-    [self.collectionView setBackgroundView:backgroundViewForCollectionView];
+    [backgroundViewForCollectionView addSubview: blurEffectView];
+    [self.collectionView setBackgroundView: backgroundViewForCollectionView];
  
 
 /*
@@ -106,7 +115,7 @@ static NSString * const reuseIdentifier = @"awesomeCell";
                    layout:(UICollectionViewLayout *)collectionViewLayout
 minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 20;
+    return 15;
 }
 
 // COLLECTION VIEW MINIMUM INTERITEM SPACING (between views within collection)
@@ -136,7 +145,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return 2;//THE PLAN: later on, we can create genre arrays, where the num of sections = num of genres
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -164,6 +173,18 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     return cell;
 }
 
+
+//in order to search for a movie from API
+/*
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate
+                                    predicateWithFormat:@"SELF contains[cd] %@",
+                                    searchText];
+    
+    searchResults = [recipes filteredArrayUsingPredicate:resultPredicate];
+}
+*/
 #pragma mark <UICollectionViewDelegate>
 
 /*

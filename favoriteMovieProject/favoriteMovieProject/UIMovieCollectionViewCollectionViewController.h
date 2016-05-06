@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIMovieCollectionViewCollectionViewController : UICollectionViewController
+@interface UIMovieCollectionViewCollectionViewController : UICollectionViewController <UISearchBarDelegate>
+
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) NSMutableArray *collectionViewTreats;
+@property (weak, nonatomic) IBOutlet UIImageView *collectionImageView;
 
 @end
