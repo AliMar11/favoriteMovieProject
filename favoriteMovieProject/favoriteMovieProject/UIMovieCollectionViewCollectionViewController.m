@@ -44,6 +44,7 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     self.searchBar.barTintColor = [UIColor lightGrayColor];
     //self.searchBar.showsCancelButton = YES;
     
+    //setting collectionV in storyboard sets these two set methods for us
     [self.collectionView setDataSource: self];
     [self.collectionView setDelegate: self];
     
@@ -58,7 +59,9 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     [backgroundViewForCollectionView addSubview: blurEffectView];
+    //[self.view addSubview: backgroundViewForCollectionView];
     [self.collectionView setBackgroundView: backgroundViewForCollectionView];
+    //set constraints for backroundCForCollectionV
  
 
 /*
@@ -167,7 +170,10 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     [movieImageView.widthAnchor constraintEqualToAnchor:cell.contentView.widthAnchor].active = YES;
     [movieImageView.centerXAnchor constraintEqualToAnchor:cell.contentView.centerXAnchor].active =YES;
     [movieImageView.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor].active =YES;
-    [movieImageView setContentMode: UIViewContentModeScaleToFill];
+   
+    //[movieImageView setContentMode: UIViewContentModeScaleToFill];
+    [movieImageView setContentMode: UIViewContentModeScaleAspectFill];
+    movieImageView.clipsToBounds = YES;
 
     
     return cell;
