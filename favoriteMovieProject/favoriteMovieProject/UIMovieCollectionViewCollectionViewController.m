@@ -145,7 +145,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;//THE PLAN: later on, we can create genre arrays, where the num of sections = num of genres
+    return 1;//THE PLAN: later on, we can create genre arrays, where the num of sections = num of genres
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
