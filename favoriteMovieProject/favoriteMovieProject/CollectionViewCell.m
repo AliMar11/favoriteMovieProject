@@ -15,4 +15,25 @@
 
 @implementation CollectionViewCell
 
+
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+          viewForSupplementaryElementOfKind:(NSString *)kind
+                                atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *reusableView = nil;
+    
+    if (kind == UICollectionElementKindSectionFooter)
+    {
+        UICollectionReusableView *footerView = [collectionView dequeueReusableCellWithReuseIdentifier: @"footerView" forIndexPath: indexPath];
+        
+        reusableView = footerView;
+    }
+    
+    [reusableView.trailingAnchor constraintEqualToAnchor: reusableView.leadingAnchor].active = YES;
+    [reusableView.leadingAnchor constraintEqualToAnchor: reusableView.trailingAnchor].active= YES;
+
+    return reusableView;
+    
+}
 @end

@@ -34,8 +34,8 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     self.searchBar = [[UISearchBar alloc] init];
     self.searchBar.delegate = self;
     self.navigationItem.titleView = self.searchBar;
-    [self.searchBar.leftAnchor constraintEqualToAnchor: self.navigationController.navigationBar.leftAnchor constant:15].active =YES;
-    [self.searchBar.rightAnchor constraintEqualToAnchor: self.navigationController.navigationBar.rightAnchor constant:15].active =YES;
+//    [self.searchBar.trailingAnchor constraintEqualToAnchor: self.navigationController.navigationBar.trailingAnchor].active =YES;
+//    [self.searchBar.leadingAnchor constraintEqualToAnchor: self.navigationController.navigationBar.leadingAnchor].active =YES;
     
     
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
@@ -178,6 +178,28 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     
     return cell;
 }
+
+/*
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+          viewForSupplementaryElementOfKind:(NSString *)kind
+                                atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *reusableView = nil;
+    
+    if (kind == UICollectionElementKindSectionFooter)
+    {
+        UICollectionReusableView *footerView = [collectionView dequeueReusableCellWithReuseIdentifier: @"footerView" forIndexPath: indexPath];
+        
+        reusableView = footerView;
+    }
+    
+    [reusableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor].active = YES;
+    [reusableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active= YES;
+    
+    return reusableView;
+}
+*/
+
 
 
 //in order to search for a movie from API

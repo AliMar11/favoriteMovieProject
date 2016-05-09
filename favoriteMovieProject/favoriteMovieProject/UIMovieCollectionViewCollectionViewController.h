@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CollectionViewCell.h"
 
 @interface UIMovieCollectionViewCollectionViewController : UICollectionViewController <UISearchBarDelegate>
 
