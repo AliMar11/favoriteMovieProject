@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B0390C61CE0F1CF0060EAB8 /* CollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0390C51CE0F1CF0060EAB8 /* CollectionReusableView.m */; };
 		2B98CAF11CD8010200F2781C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CAF01CD8010200F2781C /* main.m */; };
 		2B98CAF41CD8010200F2781C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CAF31CD8010200F2781C /* AppDelegate.m */; };
 		2B98CAF71CD8010200F2781C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CAF61CD8010200F2781C /* ViewController.m */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B0390C41CE0F1CF0060EAB8 /* CollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionReusableView.h; sourceTree = "<group>"; };
+		2B0390C51CE0F1CF0060EAB8 /* CollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionReusableView.m; sourceTree = "<group>"; };
 		2B98CAEC1CD8010200F2781C /* favoriteMovieProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favoriteMovieProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B98CAF01CD8010200F2781C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2B98CAF21CD8010200F2781C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -82,6 +85,8 @@
 				2B98CAF61CD8010200F2781C /* ViewController.m */,
 				2B98CB0C1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.h */,
 				2B98CB0D1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m */,
+				2B0390C41CE0F1CF0060EAB8 /* CollectionReusableView.h */,
+				2B0390C51CE0F1CF0060EAB8 /* CollectionReusableView.m */,
 				2B98CB121CD9D1CB00F2781C /* CollectionViewCell.h */,
 				2B98CB131CD9D1CB00F2781C /* CollectionViewCell.m */,
 				2B98CB0F1CD8048300F2781C /* MovieTableViewController.h */,
@@ -178,6 +183,7 @@
 			files = (
 				2B98CAFD1CD8010200F2781C /* favoriteMovieProject.xcdatamodeld in Sources */,
 				2B98CB0E1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m in Sources */,
+				2B0390C61CE0F1CF0060EAB8 /* CollectionReusableView.m in Sources */,
 				2B98CB111CD8048300F2781C /* MovieTableViewController.m in Sources */,
 				2B98CB191CDC4E6400F2781C /* movieObjects.m in Sources */,
 				2B98CAF71CD8010200F2781C /* ViewController.m in Sources */,

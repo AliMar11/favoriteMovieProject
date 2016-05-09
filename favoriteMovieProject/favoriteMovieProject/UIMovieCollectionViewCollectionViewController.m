@@ -45,8 +45,8 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     //self.searchBar.showsCancelButton = YES;
     
     //setting collectionV in storyboard sets these two set methods for us
-    [self.collectionView setDataSource: self];
-    [self.collectionView setDelegate: self];
+//    [self.collectionView setDataSource: self];
+//    [self.collectionView setDelegate: self];
     
     UIView *backgroundViewForCollectionView=[[UIView alloc]init];
     [backgroundViewForCollectionView setBackgroundColor:[UIColor colorWithPatternImage:
@@ -59,42 +59,17 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     [backgroundViewForCollectionView addSubview: blurEffectView];
-    //[self.view addSubview: backgroundViewForCollectionView];
     [self.collectionView setBackgroundView: backgroundViewForCollectionView];
     //set constraints for backroundCForCollectionV
  
 
-/*
-//------------------------------------
-    UIView * collectionViewBRV = [[UIView alloc] initWithFrame:CGRectMake(200,
-                                                                          200,
-                                                                          self.collectionView.contentSize.width,                                                                         self.collectionView.contentSize.height)];
-    
-        collectionViewBRV.translatesAutoresizingMaskIntoConstraints = NO;
-        [collectionViewBRV.widthAnchor constraintLessThanOrEqualToAnchor:self.collectionView.widthAnchor].active = YES;
-        [collectionViewBRV.heightAnchor constraintLessThanOrEqualToAnchor:self.collectionView.heightAnchor].active = YES;
-        [collectionViewBRV.centerXAnchor constraintLessThanOrEqualToAnchor:self.collectionView.centerXAnchor].active = YES;
-        [collectionViewBRV.centerYAnchor constraintLessThanOrEqualToAnchor:self.collectionView.centerYAnchor].active = YES;
- 
-    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"colorTriangles"]];
-    
-    imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [imageView.widthAnchor constraintLessThanOrEqualToAnchor: collectionViewBRV.widthAnchor].active = YES;
-    [imageView.heightAnchor constraintLessThanOrEqualToAnchor: collectionViewBRV.heightAnchor].active = YES;
-    [imageView.centerXAnchor constraintLessThanOrEqualToAnchor: collectionViewBRV.centerXAnchor].active = YES;
-    [imageView.centerYAnchor constraintLessThanOrEqualToAnchor: collectionViewBRV.centerYAnchor].active = YES;
-    
-    [collectionViewBRV addSubview: imageView];
-    //[self.collectionView addSubview: collectionViewBRV];
-    self.collectionView.backgroundView = collectionViewBRV;
-//------------------------------------
-*/
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class]
             forCellWithReuseIdentifier: @"awesomeCell"];
+        
 }
 
 ////// ITEM SIZE of items inside collection view
@@ -156,6 +131,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     return self.collectionViewTreats.count;
 }
 
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"awesomeCell" forIndexPath:indexPath];
@@ -171,7 +147,6 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     [movieImageView.centerXAnchor constraintEqualToAnchor:cell.contentView.centerXAnchor].active =YES;
     [movieImageView.centerYAnchor constraintEqualToAnchor:cell.contentView.centerYAnchor].active =YES;
    
-    //[movieImageView setContentMode: UIViewContentModeScaleToFill];
     [movieImageView setContentMode: UIViewContentModeScaleAspectFill];
     movieImageView.clipsToBounds = YES;
 
@@ -179,7 +154,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     return cell;
 }
 
-/*
+
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
           viewForSupplementaryElementOfKind:(NSString *)kind
                                 atIndexPath:(NSIndexPath *)indexPath
@@ -188,17 +163,15 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     
     if (kind == UICollectionElementKindSectionFooter)
     {
-        UICollectionReusableView *footerView = [collectionView dequeueReusableCellWithReuseIdentifier: @"footerView" forIndexPath: indexPath];
+        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footerView" forIndexPath:indexPath];
         
         reusableView = footerView;
+
     }
     
-    [reusableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor].active = YES;
-    [reusableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active= YES;
-    
     return reusableView;
+    
 }
-*/
 
 
 

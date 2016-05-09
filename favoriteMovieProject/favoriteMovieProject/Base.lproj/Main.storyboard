@@ -27,7 +27,7 @@
         <!--UIMovieCollection View -->
         <scene sceneID="oUl-FP-LKZ">
             <objects>
-                <collectionViewController title="UIMovieCollection View " id="IX3-ej-5rB" customClass="UIMovieCollectionViewCollectionViewController" sceneMemberID="viewController">
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" title="UIMovieCollection View " id="IX3-ej-5rB" customClass="UIMovieCollectionViewCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="sIi-It-VCW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,16 +52,10 @@
                                 </view>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="footerView" id="0sx-JI-ALu" customClass="CollectionViewCell">
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="footerView" id="ppy-Oq-s02">
                             <rect key="frame" x="0.0" y="114" width="414" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84t-Xo-ghS">
-                                    <rect key="frame" x="145" y="10" width="125" height="30"/>
-                                    <state key="normal" title="More stuff button!"/>
-                                </button>
-                            </subviews>
-                            <color key="tintColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="IX3-ej-5rB" id="KeG-Y9-OBp"/>
