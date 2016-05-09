@@ -166,11 +166,9 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
         UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footerView" forIndexPath:indexPath];
         
         reusableView = footerView;
+  }
 
-    }
-    
     return reusableView;
-    
 }
 
 
