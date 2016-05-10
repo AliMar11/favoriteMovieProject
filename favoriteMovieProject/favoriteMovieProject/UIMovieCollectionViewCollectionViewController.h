@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CollectionReusableView.h"
+#import "OMDBClient.h"
 
 @interface UIMovieCollectionViewCollectionViewController : UICollectionViewController <UISearchBarDelegate>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSMutableArray *collectionViewTreats;
 @property (weak, nonatomic) IBOutlet UIImageView *collectionImageView;
+@property (nonatomic, strong) NSMutableArray *movieRepos;
 
 @end

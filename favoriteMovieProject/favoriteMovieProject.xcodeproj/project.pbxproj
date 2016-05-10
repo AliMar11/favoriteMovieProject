@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B0390C61CE0F1CF0060EAB8 /* CollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0390C51CE0F1CF0060EAB8 /* CollectionReusableView.m */; };
+		2B0390C91CE127660060EAB8 /* OMDBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0390C81CE127660060EAB8 /* OMDBClient.m */; };
 		2B98CAF11CD8010200F2781C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CAF01CD8010200F2781C /* main.m */; };
 		2B98CAF41CD8010200F2781C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CAF31CD8010200F2781C /* AppDelegate.m */; };
 		2B98CAF71CD8010200F2781C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CAF61CD8010200F2781C /* ViewController.m */; };
@@ -20,11 +21,14 @@
 		2B98CB141CD9D1CB00F2781C /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB131CD9D1CB00F2781C /* CollectionViewCell.m */; };
 		2B98CB161CDC3E4500F2781C /* release-the-wee-kraken.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B98CB151CDC3E4500F2781C /* release-the-wee-kraken.jpg */; };
 		2B98CB191CDC4E6400F2781C /* movieObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB181CDC4E6400F2781C /* movieObjects.m */; };
+		60B20F281DA3C287BE17B562 /* libPods-favoriteMovieProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82EF284756F8B859ADC1BB41 /* libPods-favoriteMovieProject.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2B0390C41CE0F1CF0060EAB8 /* CollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionReusableView.h; sourceTree = "<group>"; };
 		2B0390C51CE0F1CF0060EAB8 /* CollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionReusableView.m; sourceTree = "<group>"; };
+		2B0390C71CE127660060EAB8 /* OMDBClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OMDBClient.h; sourceTree = "<group>"; };
+		2B0390C81CE127660060EAB8 /* OMDBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OMDBClient.m; sourceTree = "<group>"; };
 		2B98CAEC1CD8010200F2781C /* favoriteMovieProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favoriteMovieProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B98CAF01CD8010200F2781C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2B98CAF21CD8010200F2781C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -45,6 +49,9 @@
 		2B98CB151CDC3E4500F2781C /* release-the-wee-kraken.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "release-the-wee-kraken.jpg"; sourceTree = "<group>"; };
 		2B98CB171CDC4E6400F2781C /* movieObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = movieObjects.h; sourceTree = "<group>"; };
 		2B98CB181CDC4E6400F2781C /* movieObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = movieObjects.m; sourceTree = "<group>"; };
+		52E8ECAB67B56A20CDAC67E3 /* Pods-favoriteMovieProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoriteMovieProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-favoriteMovieProject/Pods-favoriteMovieProject.release.xcconfig"; sourceTree = "<group>"; };
+		82EF284756F8B859ADC1BB41 /* libPods-favoriteMovieProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-favoriteMovieProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2D0093C52B6FFC099729CBF /* Pods-favoriteMovieProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoriteMovieProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-favoriteMovieProject/Pods-favoriteMovieProject.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60B20F281DA3C287BE17B562 /* libPods-favoriteMovieProject.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +71,8 @@
 			children = (
 				2B98CAEE1CD8010200F2781C /* favoriteMovieProject */,
 				2B98CAED1CD8010200F2781C /* Products */,
+				AC0D8AD8BB9E710BAB46A9CF /* Pods */,
+				CD47814F11A3CDD968DC24E5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,9 +90,11 @@
 				2B98CAF21CD8010200F2781C /* AppDelegate.h */,
 				2B98CAF31CD8010200F2781C /* AppDelegate.m */,
 				2B98CAF51CD8010200F2781C /* ViewController.h */,
+				2B98CAF61CD8010200F2781C /* ViewController.m */,
 				2B98CB171CDC4E6400F2781C /* movieObjects.h */,
 				2B98CB181CDC4E6400F2781C /* movieObjects.m */,
-				2B98CAF61CD8010200F2781C /* ViewController.m */,
+				2B0390C71CE127660060EAB8 /* OMDBClient.h */,
+				2B0390C81CE127660060EAB8 /* OMDBClient.m */,
 				2B98CB0C1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.h */,
 				2B98CB0D1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m */,
 				2B0390C41CE0F1CF0060EAB8 /* CollectionReusableView.h */,
@@ -110,6 +122,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AC0D8AD8BB9E710BAB46A9CF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A2D0093C52B6FFC099729CBF /* Pods-favoriteMovieProject.debug.xcconfig */,
+				52E8ECAB67B56A20CDAC67E3 /* Pods-favoriteMovieProject.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CD47814F11A3CDD968DC24E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				82EF284756F8B859ADC1BB41 /* libPods-favoriteMovieProject.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,9 +146,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2B98CB061CD8010200F2781C /* Build configuration list for PBXNativeTarget "favoriteMovieProject" */;
 			buildPhases = (
+				ACB601C05BC3A9584843490E /* Check Pods Manifest.lock */,
 				2B98CAE81CD8010200F2781C /* Sources */,
 				2B98CAE91CD8010200F2781C /* Frameworks */,
 				2B98CAEA1CD8010200F2781C /* Resources */,
+				ACC5C0D54FBC7736411C50C0 /* Embed Pods Frameworks */,
+				CF70BAFF122CEC732C787658 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -176,6 +208,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		ACB601C05BC3A9584843490E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ACC5C0D54FBC7736411C50C0 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-favoriteMovieProject/Pods-favoriteMovieProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF70BAFF122CEC732C787658 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-favoriteMovieProject/Pods-favoriteMovieProject-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2B98CAE81CD8010200F2781C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -185,6 +265,7 @@
 				2B98CB0E1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m in Sources */,
 				2B0390C61CE0F1CF0060EAB8 /* CollectionReusableView.m in Sources */,
 				2B98CB111CD8048300F2781C /* MovieTableViewController.m in Sources */,
+				2B0390C91CE127660060EAB8 /* OMDBClient.m in Sources */,
 				2B98CB191CDC4E6400F2781C /* movieObjects.m in Sources */,
 				2B98CAF71CD8010200F2781C /* ViewController.m in Sources */,
 				2B98CAF41CD8010200F2781C /* AppDelegate.m in Sources */,
@@ -299,6 +380,7 @@
 		};
 		2B98CB071CD8010200F2781C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2D0093C52B6FFC099729CBF /* Pods-favoriteMovieProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = favoriteMovieProject/Info.plist;
@@ -310,6 +392,7 @@
 		};
 		2B98CB081CD8010200F2781C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52E8ECAB67B56A20CDAC67E3 /* Pods-favoriteMovieProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = favoriteMovieProject/Info.plist;

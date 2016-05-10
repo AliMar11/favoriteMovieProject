@@ -10,32 +10,23 @@
 
 @implementation movieObjects
 
-//-(instancetype) init{
-//    
-//    
-//    return self;
-//}
-
--(instancetype) initWithTitle: (NSString*)title
-                        genre: (NSString*)genre
-                         cast: (NSString*)cast
-             movieDescription: (NSString*)description
-                  releaseDate: (NSDate*)releaseDate
-                movieDuration: (int)duration
+-(instancetype) initWithTitle:(NSString *)title
+                         Year:(NSString *)year
+                       imDBID:(NSString *)ID
+                         Type:(NSString *)type
+                       Poster:(NSString *)posterPic
 {
-    
     self = [super init];
     
     if (self)
     {
         _title = title;
-        _genre = genre;
-        _cast = cast;
-        _movieDscription = description;
-        _releaseDate = releaseDate;
-        _movieDuration = duration;
+        _year = year;
+        _ID = ID;
+        _type = type;
+        _posterPic = posterPic;
+        
     }
-    
     return self;
 }
 

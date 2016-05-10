@@ -19,6 +19,22 @@ static NSString * const reuseIdentifier = @"awesomeCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+ 
+    /*
+    NSString *keyword = [[NSString alloc] init];
+    
+    [OMDBClient getRepositoriesWithKeyword:@"alien" completion:^(NSArray *response) {
+        
+        if ([UIMovieCollectionViewCollectionViewController searchBar.text]) {
+            <#statements#>
+        }
+        //        if ([UIMovieCollectionViewCollectionViewController searchBar.text != nil]) {
+        //
+        //            OMDBString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@",[UIMovieCollectionViewCollectionViewController searchBar.text];
+        //
+        
+    }];
+    */
     
     self.collectionViewTreats = [@[@"colorPiant",
                                    @"colorAbstract",
@@ -34,19 +50,11 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     self.searchBar = [[UISearchBar alloc] init];
     self.searchBar.delegate = self;
     self.navigationItem.titleView = self.searchBar;
-//    [self.searchBar.trailingAnchor constraintEqualToAnchor: self.navigationController.navigationBar.trailingAnchor].active =YES;
-//    [self.searchBar.leadingAnchor constraintEqualToAnchor: self.navigationController.navigationBar.leadingAnchor].active =YES;
-    
-    
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
     self.searchBar.placeholder = @"enter search keyword(s)";
     self.searchBar.tintColor = [UIColor blueColor];
     self.searchBar.barTintColor = [UIColor lightGrayColor];
     //self.searchBar.showsCancelButton = YES;
-    
-    //setting collectionV in storyboard sets these two set methods for us
-//    [self.collectionView setDataSource: self];
-//    [self.collectionView setDelegate: self];
     
     UIView *backgroundViewForCollectionView=[[UIView alloc]init];
     [backgroundViewForCollectionView setBackgroundColor:[UIColor colorWithPatternImage:
