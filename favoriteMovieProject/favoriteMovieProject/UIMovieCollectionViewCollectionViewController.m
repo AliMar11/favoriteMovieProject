@@ -19,22 +19,24 @@ static NSString * const reuseIdentifier = @"awesomeCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
-    /*
-    NSString *keyword = [[NSString alloc] init];
-    
-    [OMDBClient getRepositoriesWithKeyword:@"alien" completion:^(NSArray *response) {
+    NSString *keyword = [[NSString alloc]init];
+
+    if (self.searchBar.text !=nil)
+    {
+        keyword = self.searchBar.text;
+
+    }
+    else if (self.searchBar.text == nil)
+    {
+        keyword = @"star+wars";
         
-        if ([UIMovieCollectionViewCollectionViewController searchBar.text]) {
-            <#statements#>
-        }
-        //        if ([UIMovieCollectionViewCollectionViewController searchBar.text != nil]) {
-        //
-        //            OMDBString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@",[UIMovieCollectionViewCollectionViewController searchBar.text];
-        //
+    }
+    [OMDBClient getRepositoriesWithKeyword: keyword completion:^(NSArray *response)
+    {
+        
+
         
     }];
-    */
     
     self.collectionViewTreats = [@[@"colorPiant",
                                    @"colorAbstract",
@@ -54,7 +56,22 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     self.searchBar.placeholder = @"enter search keyword(s)";
     self.searchBar.tintColor = [UIColor blueColor];
     self.searchBar.barTintColor = [UIColor lightGrayColor];
-    //self.searchBar.showsCancelButton = YES;
+    //self.searchBar.searchFieldBackgroundPositionAdjustment =
+    self.searchBar.showsSearchResultsButton = YES;
+    self.searchBar.searchResultsButtonSelected = YES;
+
+    
+    
+    //search button time!!
+    UIBarButtonItem *searchButton= [[UIBarButtonItem alloc] initWithTitle:@"Search!"
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(getRepositoriesWithKeyword:completion:)];
+    self.navigationItem.rightBarButtonItem = searchButton;
+    
+//    [searchButton setTitle:@"Search!" forState:UIControlStateNormal];
+//   // [searchButton setTitle:@"Searching..." forState:UIControlEventTouchUpInside];
+    
     
     UIView *backgroundViewForCollectionView=[[UIView alloc]init];
     [backgroundViewForCollectionView setBackgroundColor:[UIColor colorWithPatternImage:
@@ -179,7 +196,12 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     return reusableView;
 }
 
-
+//now finish this later!
+-(void)searchQuery
+{
+    
+    
+}
 
 //in order to search for a movie from API
 /*

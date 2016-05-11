@@ -13,7 +13,6 @@
 
 @interface OMDBClient : NSObject
 
-+ (void)getRepositoriesWithKeyword: (NSString *)keyword
-                        completion:(void (^)(NSArray * response))getMethCompletion;
++ (void)getRepositoriesWithKeyword: (NSString *)keyword completion:(void (^)(NSArray * response))getMethCompletion;
 
 @end
