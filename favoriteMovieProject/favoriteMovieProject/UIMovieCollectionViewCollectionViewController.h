@@ -16,4 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *collectionImageView;
 @property (nonatomic, strong) NSMutableArray *movieRepos;
 
+-(void)searchButtonTapped;
+
+
 @end

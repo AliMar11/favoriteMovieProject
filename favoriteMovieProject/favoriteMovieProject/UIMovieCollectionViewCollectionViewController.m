@@ -10,6 +10,8 @@
 
 @interface UIMovieCollectionViewCollectionViewController ()
 
+@property (nonatomic, strong) NSString *keyword;
+
 @end
 
 @implementation UIMovieCollectionViewCollectionViewController
@@ -19,22 +21,12 @@ static NSString * const reuseIdentifier = @"awesomeCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString *keyword = [[NSString alloc]init];
-
-    if (self.searchBar.text !=nil)
-    {
-        keyword = self.searchBar.text;
-
-    }
-    else if (self.searchBar.text == nil)
-    {
-        keyword = @"star+wars";
-        
-    }
-    [OMDBClient getRepositoriesWithKeyword: keyword completion:^(NSArray *response)
+    
+    self.keyword = @"star+wars";
+    [OMDBClient getRepositoriesWithKeyword: self.keyword completion:^(NSArray *response)
     {
         
-
+        //***link this up to collection view cells
         
     }];
     
@@ -59,20 +51,15 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     //self.searchBar.searchFieldBackgroundPositionAdjustment =
     self.searchBar.showsSearchResultsButton = YES;
     self.searchBar.searchResultsButtonSelected = YES;
-
     
     
     //search button time!!
     UIBarButtonItem *searchButton= [[UIBarButtonItem alloc] initWithTitle:@"Search!"
                                                                     style:UIBarButtonItemStylePlain
                                                                    target:self
-                                                                   action:@selector(getRepositoriesWithKeyword:completion:)];
+                                                                   action:@selector(searchButtonTapped)];
     self.navigationItem.rightBarButtonItem = searchButton;
-    
-//    [searchButton setTitle:@"Search!" forState:UIControlStateNormal];
-//   // [searchButton setTitle:@"Searching..." forState:UIControlEventTouchUpInside];
-    
-    
+  
     UIView *backgroundViewForCollectionView=[[UIView alloc]init];
     [backgroundViewForCollectionView setBackgroundColor:[UIColor colorWithPatternImage:
                                                          [UIImage imageNamed:@"colorTriangles"]]];
@@ -85,16 +72,32 @@ static NSString * const reuseIdentifier = @"awesomeCell";
     
     [backgroundViewForCollectionView addSubview: blurEffectView];
     [self.collectionView setBackgroundView: backgroundViewForCollectionView];
-    //set constraints for backroundCForCollectionV
- 
+    //***set constraints for backroundVC For CollectionVC image
 
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
+    //***get more info on how this works
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class]
             forCellWithReuseIdentifier: @"awesomeCell"];
         
+}
+                                    
+-(void)searchButtonTapped
+{
+NSLog(@"THE SEARCH BUTTON WAS TAPPED");
+       // self.keyword = self.searchBar.text;
+        self.keyword = [self.searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+        
+    [OMDBClient getRepositoriesWithKeyword:self.keyword completion:^(NSArray *response) {
+        
+        NSLog(@"SEARCH RESPOSE:\n%@", response);
+        NSLog(@"the keyword used with 'search' button tap:%@", self.keyword);
+
+        NSLog(@"We're back!");
+
+    }];
 }
 
 ////// ITEM SIZE of items inside collection view
@@ -148,7 +151,7 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;//THE PLAN: later on, we can create genre arrays, where the num of sections = num of genres
+    return 1;//***THE PLAN: later on, we can create genre arrays, where the num of sections = num of genres
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -196,24 +199,6 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     return reusableView;
 }
 
-//now finish this later!
--(void)searchQuery
-{
-    
-    
-}
-
-//in order to search for a movie from API
-/*
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
-    NSPredicate *resultPredicate = [NSPredicate
-                                    predicateWithFormat:@"SELF contains[cd] %@",
-                                    searchText];
-    
-    searchResults = [recipes filteredArrayUsingPredicate:resultPredicate];
-}
-*/
 #pragma mark <UICollectionViewDelegate>
 
 /*

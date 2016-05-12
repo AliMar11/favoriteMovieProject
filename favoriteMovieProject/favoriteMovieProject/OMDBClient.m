@@ -14,15 +14,12 @@
 @end
 
 @implementation OMDBClient
-//{
-//    UIMovieCollectionViewCollectionViewController *keyword = [ UIMovieCollectionViewCollectionViewController keyword];
-//    
-//}
 
-//get the search working... when user writes a search, program enters that with 'search' button, which we will make, will perform GET request for that string!
-+ (void)getRepositoriesWithKeyword: (NSString *)keyword completion:(void (^)(NSArray * response))getMethCompletion
++ (void)getRepositoriesWithKeyword: (NSString *)keyword
+                        completion:(void (^)(NSArray * response))getMethCompletion
 {
     NSString *OMDBString = [NSString stringWithFormat: @"http://www.omdbapi.com/?s=%@&page=1", keyword];
+    NSLog(@"OMBD GET method URL: %@", OMDBString);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     [manager GET:OMDBString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
@@ -31,7 +28,7 @@
         NSMutableArray *movies = [[NSMutableArray alloc]init];
         
         NSArray *movieDictionaries = responseObject[@"Search"];
-        //NSLog(@"MOVIE REPOS!%@", movieDictionaries);
+        //NSLog(@"MOVIE REPOS!\n%@", movieDictionaries);
         
         for (NSDictionary *movieObject in movieDictionaries)
         {
@@ -45,13 +42,14 @@
             NSLog(@"\n\nMoViE rEpOs Dictionary array are:\n%@",movieObjectMeat);
             [movies addObject:movieObjectMeat];
         }
-        NSLog(@"Result:%@", movies);
-
+        NSLog(@"Result from ViewDidLoad movie query:%@", movies);
         getMethCompletion(movies);
+        
     }
          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
     {
         NSLog(@"Error fetching GET request :( \nerror = %@", error.localizedDescription);
+        //***incorporate error handling
     }];
 }
 
