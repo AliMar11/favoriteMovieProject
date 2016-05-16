@@ -19,7 +19,6 @@
 		2B98CB0E1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB0D1CD803A700F2781C /* UIMovieCollectionViewCollectionViewController.m */; };
 		2B98CB111CD8048300F2781C /* MovieTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB101CD8048300F2781C /* MovieTableViewController.m */; };
 		2B98CB141CD9D1CB00F2781C /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB131CD9D1CB00F2781C /* CollectionViewCell.m */; };
-		2B98CB161CDC3E4500F2781C /* release-the-wee-kraken.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2B98CB151CDC3E4500F2781C /* release-the-wee-kraken.jpg */; };
 		2B98CB191CDC4E6400F2781C /* movieObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB181CDC4E6400F2781C /* movieObjects.m */; };
 		60B20F281DA3C287BE17B562 /* libPods-favoriteMovieProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82EF284756F8B859ADC1BB41 /* libPods-favoriteMovieProject.a */; };
 /* End PBXBuildFile section */
@@ -46,7 +45,6 @@
 		2B98CB101CD8048300F2781C /* MovieTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewController.m; sourceTree = "<group>"; };
 		2B98CB121CD9D1CB00F2781C /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		2B98CB131CD9D1CB00F2781C /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
-		2B98CB151CDC3E4500F2781C /* release-the-wee-kraken.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "release-the-wee-kraken.jpg"; sourceTree = "<group>"; };
 		2B98CB171CDC4E6400F2781C /* movieObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = movieObjects.h; sourceTree = "<group>"; };
 		2B98CB181CDC4E6400F2781C /* movieObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = movieObjects.m; sourceTree = "<group>"; };
 		52E8ECAB67B56A20CDAC67E3 /* Pods-favoriteMovieProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoriteMovieProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-favoriteMovieProject/Pods-favoriteMovieProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 				2B98CB101CD8048300F2781C /* MovieTableViewController.m */,
 				2B98CAF81CD8010200F2781C /* Main.storyboard */,
 				2B98CAFE1CD8010200F2781C /* Assets.xcassets */,
-				2B98CB151CDC3E4500F2781C /* release-the-wee-kraken.jpg */,
 				2B98CB001CD8010200F2781C /* LaunchScreen.storyboard */,
 				2B98CB031CD8010200F2781C /* Info.plist */,
 				2B98CAFB1CD8010200F2781C /* favoriteMovieProject.xcdatamodeld */,
@@ -202,7 +199,6 @@
 				2B98CB021CD8010200F2781C /* LaunchScreen.storyboard in Resources */,
 				2B98CAFF1CD8010200F2781C /* Assets.xcassets in Resources */,
 				2B98CAFA1CD8010200F2781C /* Main.storyboard in Resources */,
-				2B98CB161CDC3E4500F2781C /* release-the-wee-kraken.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

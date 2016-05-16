@@ -14,6 +14,9 @@
 @interface OMDBClient : NSObject
 
 @property (nonatomic, strong) NSMutableArray *movies;
-+ (void)getRepositoriesWithKeyword: (NSString *)keyword completion:(void (^)(NSArray * response))getMethCompletion;
+@property (nonatomic, strong) NSMutableArray *movieObjectMeat;
+
++ (void)getRepositoriesWithKeyword: (NSString *)keyword completion:(void (^)(NSMutableArray * movies))getMethCompletion;
++ (void)randomContentSearchWithCompletion:(void (^)(NSMutableArray * movies))getMethCompletion;
 
 @end

@@ -8,6 +8,12 @@
 
 #import "movieObjects.h"
 
+@interface movieObjects ()
+
+//@property (nonatomic, strong) movieObjects *sharedDataStore;
+
+@end
+
 @implementation movieObjects
 
 -(instancetype) initWithTitle:(NSString *)title

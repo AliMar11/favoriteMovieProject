@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OMDBClient.h"
+#import "movieObjects.h"
 
 @interface UIMovieCollectionViewCollectionViewController : UICollectionViewController <UISearchBarDelegate>
 
@@ -15,8 +16,8 @@
 @property (nonatomic, strong) NSMutableArray *collectionViewTreats;
 @property (weak, nonatomic) IBOutlet UIImageView *collectionImageView;
 @property (nonatomic, strong) NSMutableArray *movieRepos;
+@property (nonatomic, strong) NSMutableArray *movieCVArray;
 
--(void)searchButtonTapped;
-
+- (void)searchButtonTapped;
 
 @end
