@@ -30,7 +30,12 @@
         
          // [self.movieCVArray arrayByAddingObjectsFromArray: response]; //why doesn't this work?
          NSLog(@"MOVIECVARRAY: %@", self.movieCVArray);
-         [self.collectionView reloadData];
+         
+         [[NSOperationQueue mainQueue] addOperationWithBlock:^
+         {
+               [self.collectionView reloadData];
+         }];
+       
 
      }];
     
@@ -88,14 +93,17 @@
      {
          NSLog(@"SEARCH RESPOSE:\n%@", movies);
          NSLog(@"the keyword used with 'search' button tap:%@", self.keyword);
+         self.movieCVArray = movies;
          
 //         [self.collectionView registerClass:[UICollectionViewCell class]
 //                 forCellWithReuseIdentifier: @"awesomeCell"];
-         [self.collectionView reloadData];
-     
-         [self numberOfSectionsInCollectionView: self.collectionView];
-         NSIndexPath *indexPath = [NSIndexPath indexPathWithIndex: movies.count];
-         [self collectionView:self.collectionView cellForItemAtIndexPath: indexPath];
+         
+         [[NSOperationQueue mainQueue] addOperationWithBlock:
+         ^{
+             [self.collectionView reloadData];
+
+         }];
+
      }];
 }
 
@@ -129,7 +137,7 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
                    layout:(UICollectionViewLayout *)collectionViewLayout
 minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 10;
+    return 5;
 }
 
 - (void)didReceiveMemoryWarning
@@ -190,8 +198,15 @@ minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
     UIImage *movieCVPosterImage = [[UIImage alloc] initWithData: movieCVData];
     
     movieImageView.image = movieCVPosterImage;
+    if (!movieImageView.image)
+    {
+//        UIImageView *missingImageView = [[UIImageView alloc]initWithImage: [UIImage imageNamed:@"missingMilk"]];
+//        movieImageView = missingImageView;
+       movieImageView.image = [UIImage imageNamed:@"missingMilk"];
+    }
     NSLog(@"movieCVPosterImage:\n%@", movieCVPosterImage);
-    NSLog(@"movieCVPosterImage:\n%@", movieCVPosterImage);
+    
+   
     
     [cell.contentView addSubview:movieImageView];
  
