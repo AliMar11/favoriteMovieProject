@@ -1,20 +1,14 @@
 //
-//  movieObjects.m
+//  FISMovie.m
 //  favoriteMovieProject
 //
-//  Created by Alicia Marisal on 5/6/16.
+//  Created by Alicia Marisal on 6/20/16.
 //  Copyright © 2016 Alicia Marisal. All rights reserved.
 //
 
-#import "movieObjects.h"
+#import "FISMovie.h"
 
-@interface movieObjects ()
-
-//@property (nonatomic, strong) movieObjects *sharedDataStore;
-
-@end
-
-@implementation movieObjects
+@implementation FISMovie : NSObject
 
 -(instancetype) initWithTitle:(NSString *)title
                          Year:(NSString *)year
@@ -31,7 +25,6 @@
         _ID = ID;
         _type = type;
         _posterPic = posterPic;
-        
     }
     return self;
 }

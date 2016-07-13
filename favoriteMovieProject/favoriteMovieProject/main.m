@@ -1,3 +1,4 @@
+
 //
 //  main.m
 //  favoriteMovieProject
@@ -7,10 +8,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
+#import "FISAppDelegate.h"
 
-int main(int argc, char * argv[]) {
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+int main(int argc, char * argv[])
+{
+    @autoreleasepool
+    {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([FISAppDelegate class]));
     }
 }

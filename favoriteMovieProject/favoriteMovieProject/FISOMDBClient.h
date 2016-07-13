@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking.h>
-#import "movieObjects.h"
-#import "UIMovieCollectionViewCollectionViewController.h"
+#import "MovieObjects+CoreDataProperties.h"
+#import "FISmovie.h"
 
-@interface OMDBClient : NSObject
+@interface FISOMDBClient : NSObject
 
 @property (nonatomic, strong) NSMutableArray *movies;
 @property (nonatomic, strong) NSMutableArray *movieObjectMeat;
+@property (nonatomic, strong) NSString *OMDBString;
 
 + (void)getRepositoriesWithKeyword: (NSString *)keyword completion:(void (^)(NSMutableArray * movies))getMethCompletion;
 + (void)randomContentSearchWithCompletion:(void (^)(NSMutableArray * movies))getMethCompletion;
