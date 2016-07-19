@@ -1,8 +1,8 @@
 //
-//  MovieObjects.h
+//  DetailMovieObject.h
 //  favoriteMovieProject
 //
-//  Created by Alicia Marisal on 7/7/16.
+//  Created by Alicia Marisal on 7/19/16.
 //  Copyright © 2016 Alicia Marisal. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MovieObjects : NSManagedObject
+@interface DetailMovieObject : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -19,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "MovieObjects+CoreDataProperties.h"
+#import "DetailMovieObject+CoreDataProperties.h"

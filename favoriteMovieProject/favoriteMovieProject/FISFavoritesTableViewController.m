@@ -95,14 +95,13 @@
     NSLog(@"");
     FISMovie *aFavoritedMovie = favoritedMovies[indexPath.row];
     
-    NSLog(@"\n\nFISMOVIE OBJECT:\n%@\n\n", aFavoritedMovie.posterPic);
-
-    NSURL *NSURLPic = [NSURL URLWithString: aFavoritedMovie.posterPic];
+    NSLog(@"\n\nFISMOVIE OBJECT:\n%@\n\n", aFavoritedMovie.poster);
+    NSURL *NSURLPic = [NSURL URLWithString: aFavoritedMovie.poster];
     NSData *picData = [[NSData alloc] initWithContentsOfURL: NSURLPic];
     UIImage *posterPicImage = [UIImage imageWithData: picData];
 
     cell.imageView.image = posterPicImage;
-    cell.textLabel.text = aFavoritedMovie.title;
+   // cell.textLabel.text = aFavoritedMovie.title;
 
     // No cell seperators = clean design
     //tableView.separatorColor = [UIColor clearColor];

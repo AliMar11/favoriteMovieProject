@@ -40,7 +40,7 @@
     self.searchBar.delegate = self;
     self.navigationItem.titleView = self.searchBar;
     self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    self.searchBar.placeholder = @"enter your movie dream(s)";
+    self.searchBar.placeholder = @"Find movies, TV shows and more...";
     self.searchBar.tintColor = [UIColor blueColor];
     self.searchBar.barTintColor = [UIColor lightGrayColor];
     self.searchBar.showsSearchResultsButton = YES;
@@ -80,7 +80,7 @@
     NSLog(@"THE SEARCH BUTTON WAS TAPPED");
     
     [self.movieCVArray removeAllObjects];
-    self.keyword = [self.searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    self.keyword = [self.searchBar.text stringByReplacingOccurrencesOfString: @" " withString: @"+"];
     
     [FISOMDBClient getRepositoriesWithKeyword:self.keyword completion: ^(NSMutableArray *movies)
      {
@@ -97,7 +97,6 @@
 
 - (IBAction)moreMoviesButtonTapped:(id)sender
 {
-
    NSString *titleForSearch = [[self.movieCVArray[1] valueForKey: @"title"] stringByReplacingOccurrencesOfString: @" " withString:@"+"];
     NSLog(@"\n\nMOVIEARRAY:%@\n\n", titleForSearch);
 
@@ -180,7 +179,7 @@ minimumInteritemSpacingForSectionAtIndex: (NSInteger)section
  
     UIImageView *movieImageView = [[UIImageView alloc]init];
     NSDictionary *aMovieCVDictionary= self.movieCVArray[indexPath.row];
-    NSURL *movieCVPosterURL = [[NSURL alloc] initWithString: [aMovieCVDictionary valueForKey: @"_posterPic"]];
+    NSURL *movieCVPosterURL = [[NSURL alloc] initWithString: [aMovieCVDictionary valueForKey: @"_poster"]];
     NSData *movieCVData = [[NSData alloc] initWithContentsOfURL: movieCVPosterURL];
     UIImage *movieCVPosterImage = [[UIImage alloc] initWithData: movieCVData];
     movieImageView.image = movieCVPosterImage;
@@ -211,7 +210,7 @@ minimumInteritemSpacingForSectionAtIndex: (NSInteger)section
     
     if (kind == UICollectionElementKindSectionFooter)
     {
-        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind: UICollectionElementKindSectionFooter
+        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                withReuseIdentifier: @"footerView"
                                       forIndexPath: indexPath];
         reusableView = footerView;
@@ -222,15 +221,15 @@ minimumInteritemSpacingForSectionAtIndex: (NSInteger)section
 
 - (void)collectionView: (UICollectionView *)collectionView didSelectItemAtIndexPath: (NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier: @"selectedCellSegue" sender:self];
+    [self performSegueWithIdentifier: @"selectedCellSegue" sender: self];
 }
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender: (id)sender
 {
     FISDetailViewController *movieDataTrain = segue.destinationViewController;
-
-    NSIndexPath *indexSelected = [self.collectionView.indexPathsForSelectedItems objectAtIndex: 0];
+    
+    NSIndexPath *indexSelected = self.collectionView.indexPathsForSelectedItems.firstObject;
     
     FISMovie *movieObjectToBePassed = self.movieCVArray[indexSelected.row];
     movieDataTrain.seguedMovie = movieObjectToBePassed;

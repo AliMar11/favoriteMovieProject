@@ -126,7 +126,7 @@
 -(void)fetchData
 {
     NSLog(@"\n\nFETCHING SOME YUMMY DATA!\n\n");
-    NSFetchRequest *favoriteMoviesArray = [NSFetchRequest fetchRequestWithEntityName: @"MovieObjects"];
+    NSFetchRequest *favoriteMoviesArray = [NSFetchRequest fetchRequestWithEntityName: @"MovieObject"];
     self.movies = [self.managedObjectContext executeFetchRequest: favoriteMoviesArray error:nil];
 }
 

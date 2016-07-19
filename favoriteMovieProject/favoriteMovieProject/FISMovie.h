@@ -11,15 +11,33 @@
 @interface FISMovie : NSObject
 
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *year;
-@property (nonatomic, strong) NSString *ID;
+@property (nonatomic, strong) NSString *poster;
+@property (nonatomic, strong) NSString *imdbID;
+@property (nonatomic, strong) NSString *imdbScore;
+@property (nonatomic, strong) NSString *releaseDate;
+@property (nonatomic, strong) NSString *filmRating;
+@property (nonatomic, strong) NSString *runTime;
+@property (nonatomic, strong) NSString *genre;
+@property (nonatomic, strong) NSString *director;
+@property (nonatomic, strong) NSString *actors;
 @property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) NSString *posterPic;
+@property (nonatomic, strong) NSString *plot;
 
--(instancetype) initWithTitle:(NSString*)title
-                         Year:(NSString *)year
-                       imDBID:(NSString *)ID
-                         Type:(NSString*)type
-                       Poster:(NSString*)posterPic;
+-(instancetype) initWithTitle: (NSString*) title
+                       poster: (NSString*) poster
+                       imdbID: (NSString*) imdbID;
+
+-(instancetype) initWithPoster: (NSString *) poster
+                        imdbID: (NSString*) imdbID
+                         title: (NSString *) title
+                   releaseDate: (NSString *) releaseDate
+                    filmRating: (NSString *) filmRating
+                     imdbScore: (NSString *) imdbScore
+                       runTime: (NSString *) runTime
+                         genre: (NSString *) genre
+                      director: (NSString *) director
+                        actors: (NSString *) actors
+                          type: (NSString *) type
+                          plot: (NSString *) plot;
 
 @end

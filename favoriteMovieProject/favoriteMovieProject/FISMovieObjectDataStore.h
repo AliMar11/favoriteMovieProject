@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MovieObjects.h"
+#import "DetailMovieObject.h"
 #import "FISDetailViewController.h"
 
 @interface FISMovieObjectDataStore : NSObject

@@ -1,14 +1,14 @@
 //
-//  MovieObjects.m
+//  DetailMovieObject.m
 //  favoriteMovieProject
 //
-//  Created by Alicia Marisal on 7/7/16.
+//  Created by Alicia Marisal on 7/19/16.
 //  Copyright © 2016 Alicia Marisal. All rights reserved.
 //
 
-#import "MovieObjects.h"
+#import "DetailMovieObject.h"
 
-@implementation MovieObjects
+@implementation DetailMovieObject
 
 // Insert code here to add functionality to your managed object subclass
 

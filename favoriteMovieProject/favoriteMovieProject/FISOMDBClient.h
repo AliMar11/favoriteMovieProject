@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking.h>
-#import "MovieObjects+CoreDataProperties.h"
+//#import "DetailMovieObject+CoreDataProperties.h"
 #import "FISmovie.h"
+#import "FISMovieObjectDataStore.h"
 
 @interface FISOMDBClient : NSObject
 
@@ -19,5 +20,7 @@
 
 + (void)getRepositoriesWithKeyword: (NSString *)keyword completion:(void (^)(NSMutableArray * movies))getMethCompletion;
 + (void)randomContentSearchWithCompletion:(void (^)(NSMutableArray * movies))getMethCompletion;
+
++ (void)getMovieDetailWithMovieID: (NSString *)imdbID completion:(void (^)(NSDictionary *desiredDictionary))getMethCompletion;
 
 @end
