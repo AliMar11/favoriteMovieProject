@@ -13,7 +13,6 @@
 @interface FISFavoritesTableViewController : UITableViewController
 
 -(void)deleteAllTheThingsWithCompletion:(void(^)(BOOL))completion;
-//-(void)deleteAllTheThings;
 -(void)TVreload;
 
 

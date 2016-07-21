@@ -28,7 +28,7 @@
     [manager GET: OMDBString parameters: nil progress: nil success:
      ^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject)
      {
-         NSLog(@"Successful in fetching GET request in 'randomContentSearch'.");
+         NSLog(@"\n\nSuccessful in fetching GET request in 'randomContentSearch'.\n\n");
          NSMutableArray *movies = [[NSMutableArray alloc]init];
          NSArray *movieDictionaries = responseObject[@"Search"];
          
@@ -70,8 +70,8 @@
         {
             NSLog(@"inside For loop!");
             FISMovie *movieObjectMeat = [[FISMovie alloc] initWithTitle: movieObject[@"Title"]
-                                                                poster: movieObject[@"Poster"]
-                                                                imdbID: movieObject[@"imdbID"]];
+                                                                 poster: movieObject[@"Poster"]
+                                                                 imdbID: movieObject[@"imdbID"]];
             
             [movies addObject: movieObjectMeat];
         }

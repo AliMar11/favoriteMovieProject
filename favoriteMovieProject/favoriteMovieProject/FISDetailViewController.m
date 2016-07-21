@@ -6,15 +6,17 @@
 //
 
 #import "FISDetailViewController.h"
+#import "FISMovieDetailViewController.h"
 
 @interface FISDetailViewController ()
 
 @property (strong, nonatomic) FISMovieObjectDataStore *sharedDataStore;
-@property (weak, nonatomic) IBOutlet UITextField *titleTextfield;
-@property (weak, nonatomic) IBOutlet UITextField *yearTextfield;
-@property (weak, nonatomic) IBOutlet UITextField *typeTexfield;
+@property (weak, nonatomic) IBOutlet UITextField *typeTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *genreTextfield;
+@property (weak, nonatomic) IBOutlet UITextField *filmRatingTexfield;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextbox;
 @property (weak, nonatomic) IBOutlet UIStackView *textStackView;
+@property (weak, nonatomic) IBOutlet UIButton *moreInfoButton;
 
 @end
 
@@ -54,7 +56,7 @@
     UIImage *dataAsImage = [[UIImage alloc] initWithData: moviePicData];
     self.backgroundImageView.image = dataAsImage;
     
-    //poster Image View setup
+    //background Image View setup
     UIImageView *posterPictureView =[[UIImageView alloc]initWithImage: dataAsImage];
     
     UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleExtraLight];
@@ -86,29 +88,24 @@
     
     NSLog(@"%@", self.seguedMovie);
     [self displayMovieInfo];
-    
 }
 
 -(void)displayMovieInfo
 {
     NSLog(@"\n\n\nDISPLAY METHOD CALLED\n\n");
-    self.yearTextfield.text = [NSString stringWithFormat: @"  Released:  %@", self.seguedMovie.releaseDate];
-    self.typeTexfield.text = [NSString stringWithFormat: @"  Type:  %@", self.seguedMovie.type];
-    self.descriptionTextbox.text = self.seguedMovie.plot;
+    self.typeTextfield.text = [NSString stringWithFormat: @"  Released:  %@", self.seguedMovie.releaseDate];
+    self.genreTextfield.text = [NSString stringWithFormat: @"  Type:  %@", self.seguedMovie.type];
+    self.filmRatingTexfield.text = [NSString stringWithFormat:@"  Rating:  %@", self.seguedMovie.filmRating];
+    self.descriptionTextbox.text = [NSString stringWithFormat: @"Plot:%@",self.seguedMovie.plot];
 
-    self.titleTextfield.borderStyle = UITextBorderStyleNone;
-    self.titleTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];//here offerTitle is the instance of `UILabel`
-    self.yearTextfield.borderStyle = UITextBorderStyleNone;
-    self.yearTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
-    self.typeTexfield.borderStyle = UITextBorderStyleNone;
-    self.typeTexfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
+    self.typeTextfield.borderStyle = UITextBorderStyleNone;
+    self.typeTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];//here offerTitle is the instance of `UILabel`
+    self.genreTextfield.borderStyle = UITextBorderStyleNone;
+    self.genreTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
+    self.filmRatingTexfield.borderStyle = UITextBorderStyleNone;
+    self.filmRatingTexfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
     self.descriptionTextbox.font = [UIFont fontWithName:@"Ariel" size:16.0f];
 
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 -(void)saveMovieObject
@@ -117,24 +114,40 @@
 
     DetailMovieObject *newFavoriteMovie = [NSEntityDescription insertNewObjectForEntityForName: @"MovieObject" inManagedObjectContext: self.sharedDataStore.managedObjectContext];
    
-    newFavoriteMovie.title = self.titleTextfield.text;
-    //newFavoriteMovie.year = self.yearTextfield.text;
-    newFavoriteMovie.type = self.typeTexfield.text;
+    newFavoriteMovie.title = self.navigationItem.title;
+    newFavoriteMovie.filmRating = self.filmRatingTexfield.text;
+    newFavoriteMovie.genre = self.genreTextfield.text;
+    newFavoriteMovie.type = self.typeTextfield.text;
+    newFavoriteMovie.plot = self.descriptionTextbox.text;
     
-    NSString *poster = self.seguedMovie.poster;
-    newFavoriteMovie.poster = poster;
+    newFavoriteMovie.actors = self.seguedMovie.actors;
+    newFavoriteMovie.director = self.seguedMovie.director;
+    newFavoriteMovie.imdbScore = self.seguedMovie.imdbScore;
+    newFavoriteMovie.poster = self.seguedMovie.poster;
+    newFavoriteMovie.releaseDate = self.seguedMovie.releaseDate;
+    newFavoriteMovie.runTime = self.seguedMovie.runTime;
+    newFavoriteMovie.type = self.typeTextfield.text;
         
     [self.sharedDataStore saveContext];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)moreInfoButtonTapped
+{
+    NSLog(@"More information ButttonTapped!");
+    [self performSegueWithIdentifier: @"detailInfoSegue" sender: self];
 }
-*/
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    FISMovieDetailViewController *movieTrain = segue.destinationViewController;
+    FISMovie *passedMovie = self.seguedMovie;
+    movieTrain.movie = passedMovie;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
 
 @end

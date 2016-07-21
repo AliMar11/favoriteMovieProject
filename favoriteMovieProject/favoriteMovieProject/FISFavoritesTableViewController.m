@@ -57,11 +57,14 @@
     [areYouSureController addAction: areYouSureAction];
     [areYouSureController addAction: cancelAction];
     [self presentViewController: areYouSureController animated:YES completion:nil];
-//    
-//    if (completion)
-//    {
-//        [self.tableView reloadData];
-//    }
+    
+    if (completion)
+    {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^
+        {
+            [self.tableView reloadData];
+        }];
+    }
 }
 
 -(void)TVreload
@@ -101,7 +104,7 @@
     UIImage *posterPicImage = [UIImage imageWithData: picData];
 
     cell.imageView.image = posterPicImage;
-   // cell.textLabel.text = aFavoritedMovie.title;
+    cell.textLabel.text = aFavoritedMovie.title;
 
     // No cell seperators = clean design
     //tableView.separatorColor = [UIColor clearColor];

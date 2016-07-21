@@ -31,10 +31,6 @@
                         type: self.type
                         plot: self.plot];
         
-//        _title = title;
-//        _poster = poster;
-//        _imdbID = imdbID;
-        
     }
     return self;
 }

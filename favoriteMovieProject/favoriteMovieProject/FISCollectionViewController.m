@@ -106,7 +106,6 @@
     {
         self.buttonClickCounter = 2;
     }
-    NSLog(@"\n\nBUTTONCLICK COUNTED??:%d", self.buttonClickCounter);
     
     NSString *nextPage = [NSString stringWithFormat: @"http://www.omdbapi.com/?s=%@&page=%d", titleForSearch, self.buttonClickCounter];
 
@@ -228,10 +227,9 @@ minimumInteritemSpacingForSectionAtIndex: (NSInteger)section
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender: (id)sender
 {
     FISDetailViewController *movieDataTrain = segue.destinationViewController;
-    
     NSIndexPath *indexSelected = self.collectionView.indexPathsForSelectedItems.firstObject;
-    
     FISMovie *movieObjectToBePassed = self.movieCVArray[indexSelected.row];
+    
     movieDataTrain.seguedMovie = movieObjectToBePassed;
     
 }

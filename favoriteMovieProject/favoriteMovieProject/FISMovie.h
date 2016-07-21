@@ -28,8 +28,8 @@
                        imdbID: (NSString*) imdbID;
 
 -(instancetype) initWithPoster: (NSString *) poster
-                        imdbID: (NSString*) imdbID
                          title: (NSString *) title
+                        imdbID: (NSString *) imdbID
                    releaseDate: (NSString *) releaseDate
                     filmRating: (NSString *) filmRating
                      imdbScore: (NSString *) imdbScore

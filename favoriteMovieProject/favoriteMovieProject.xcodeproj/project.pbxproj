@@ -21,6 +21,7 @@
 		2B98CB021CD8010200F2781C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B98CB001CD8010200F2781C /* LaunchScreen.storyboard */; };
 		2BF4CAD01D3EA677006B1079 /* DetailMovieObject+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4CACD1D3EA677006B1079 /* DetailMovieObject+CoreDataProperties.m */; };
 		2BF4CAD11D3EA677006B1079 /* DetailMovieObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4CACF1D3EA677006B1079 /* DetailMovieObject.m */; };
+		2BF4CAD71D3EBCAF006B1079 /* FISMovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4CAD61D3EBCAF006B1079 /* FISMovieDetailViewController.m */; };
 		60B20F281DA3C287BE17B562 /* libPods-favoriteMovieProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82EF284756F8B859ADC1BB41 /* libPods-favoriteMovieProject.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,8 @@
 		2BF4CACD1D3EA677006B1079 /* DetailMovieObject+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DetailMovieObject+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2BF4CACE1D3EA677006B1079 /* DetailMovieObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMovieObject.h; sourceTree = "<group>"; };
 		2BF4CACF1D3EA677006B1079 /* DetailMovieObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMovieObject.m; sourceTree = "<group>"; };
+		2BF4CAD51D3EBCAF006B1079 /* FISMovieDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISMovieDetailViewController.h; sourceTree = "<group>"; };
+		2BF4CAD61D3EBCAF006B1079 /* FISMovieDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISMovieDetailViewController.m; sourceTree = "<group>"; };
 		52E8ECAB67B56A20CDAC67E3 /* Pods-favoriteMovieProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoriteMovieProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-favoriteMovieProject/Pods-favoriteMovieProject.release.xcconfig"; sourceTree = "<group>"; };
 		82EF284756F8B859ADC1BB41 /* libPods-favoriteMovieProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-favoriteMovieProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D0093C52B6FFC099729CBF /* Pods-favoriteMovieProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-favoriteMovieProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-favoriteMovieProject/Pods-favoriteMovieProject.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +114,8 @@
 				2B98CB0D1CD803A700F2781C /* FISCollectionViewController.m */,
 				2B79BBA11D1B36460025759A /* FISDetailViewController.h */,
 				2B79BBA21D1B36460025759A /* FISDetailViewController.m */,
+				2BF4CAD51D3EBCAF006B1079 /* FISMovieDetailViewController.h */,
+				2BF4CAD61D3EBCAF006B1079 /* FISMovieDetailViewController.m */,
 				2B98CB0F1CD8048300F2781C /* FISFavoritesTableViewController.h */,
 				2B98CB101CD8048300F2781C /* FISFavoritesTableViewController.m */,
 				1BE3467B1D10724B005A502E /* FISMovieObjectDataStore.h */,
@@ -271,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B79BB9B1D18B5EE0025759A /* main.m in Sources */,
+				2BF4CAD71D3EBCAF006B1079 /* FISMovieDetailViewController.m in Sources */,
 				1BE3467D1D10724B005A502E /* FISMovieObjectDataStore.m in Sources */,
 				2B05ED3D1D17BADC00FD37A5 /* FISMovie.m in Sources */,
 				2B79BB9C1D18B68E0025759A /* FISFavoritesTableViewController.m in Sources */,
