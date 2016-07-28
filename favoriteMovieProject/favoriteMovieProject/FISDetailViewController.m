@@ -74,7 +74,7 @@
     //[posterPictureView.bottomAnchor constraintEqualToAnchor: visualViewBlur.bottomAnchor constant:20].active = YES;
 }
 
-- (void)updateMovieWithDictionary:(NSDictionary *)desiredDictionary
+- (void)updateMovieWithDictionary: (NSDictionary *)desiredDictionary
 {
     NSLog(@"updating the init method with detail data");
     self.seguedMovie.releaseDate = [desiredDictionary valueForKey: @"Released"];
@@ -105,7 +105,6 @@
     self.filmRatingTexfield.borderStyle = UITextBorderStyleNone;
     self.filmRatingTexfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
     self.descriptionTextbox.font = [UIFont fontWithName:@"Ariel" size:16.0f];
-
 }
 
 -(void)saveMovieObject
@@ -127,8 +126,12 @@
     newFavoriteMovie.releaseDate = self.seguedMovie.releaseDate;
     newFavoriteMovie.runTime = self.seguedMovie.runTime;
     newFavoriteMovie.type = self.typeTextfield.text;
-        
-    [self.sharedDataStore saveContext];
+    
+   [[NSOperationQueue mainQueue] addOperationWithBlock:^
+    {
+         [self.sharedDataStore saveContext];
+    }];
+  
 }
 
 -(void)moreInfoButtonTapped

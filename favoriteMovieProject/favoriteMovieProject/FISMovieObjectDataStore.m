@@ -127,18 +127,19 @@
 {
     NSLog(@"\n\nFETCHING SOME YUMMY DATA!\n\n");
     NSFetchRequest *favoriteMoviesArray = [NSFetchRequest fetchRequestWithEntityName: @"MovieObject"];
-    self.movies = [self.managedObjectContext executeFetchRequest: favoriteMoviesArray error:nil];
+    self.movies = [self.managedObjectContext executeFetchRequest: favoriteMoviesArray error: nil];
 }
 
 -(void)deleteAllContext
 {
-    NSFetchRequest * deleteRequest = [[NSFetchRequest alloc] initWithEntityName: @"MovieObjects"];
+    NSFetchRequest * deleteRequest = [[NSFetchRequest alloc] initWithEntityName: @"MovieObject"];
     NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest: deleteRequest];
     
     NSError *deleteError = nil;
     [self.persistentStoreCoordinator executeRequest: delete
                                         withContext: self.managedObjectContext
                                               error: &deleteError];
+    [self fetchData];
 }
 
 @end

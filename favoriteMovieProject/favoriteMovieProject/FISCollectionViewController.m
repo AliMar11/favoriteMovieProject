@@ -127,7 +127,7 @@
                   layout: (UICollectionView*)collectionViewLayout
   sizeForItemAtIndexPath: (NSIndexPath *)indexPath
 {
-    CGFloat cellLeg = (self.collectionView.frame.size.width/2.5) -2;
+    CGFloat cellLeg = (self.collectionView.frame.size.width/2.5)-2;
     return CGSizeMake(cellLeg, cellLeg*1.5);
 }
 
@@ -136,7 +136,7 @@
                         layout: (UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex: (NSInteger)section
 {
-    return UIEdgeInsetsMake(10, 10, 10, 10);
+    return UIEdgeInsetsMake(20, 25, 20, 25);
 }
 
 //// COLLECTION VIEW MINIMUM LINE SPACING (Horizontal spacing betweet top and bottom)
@@ -144,16 +144,16 @@
                    layout: (UICollectionViewLayout *)collectionViewLayout
 minimumLineSpacingForSectionAtIndex: (NSInteger)section
 {
-    return 15;
+    return 20;
 }
 
-// COLLECTION VIEW MINIMUM INTERITEM SPACING (between views within collection)
-- (CGFloat)collectionView: (UICollectionView *)collectionView
-                   layout: (UICollectionViewLayout *)collectionViewLayout
-minimumInteritemSpacingForSectionAtIndex: (NSInteger)section
-{
-    return 5;
-}
+//// COLLECTION VIEW MINIMUM INTERITEM SPACING (between views within collection)
+//- (CGFloat)collectionView: (UICollectionView *)collectionView
+//                   layout: (UICollectionViewLayout *)collectionViewLayout
+//minimumInteritemSpacingForSectionAtIndex: (NSInteger)section
+//{
+//    return 5;
+//}
 
 - (void)didReceiveMemoryWarning
 {

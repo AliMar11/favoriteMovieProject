@@ -22,6 +22,7 @@
     
     self.sharedDatastore = [FISMovieObjectDataStore sharedDataStore];
     [self.sharedDatastore fetchData];
+    //[self.tableView reloadData];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"detailMovieCell"];
 
@@ -34,6 +35,14 @@
     // self.clearsSelectionOnViewWillAppear = NO;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    [self.sharedDatastore fetchData];
+    [self.tableView reloadData];
+
+}
+
 -(void)deleteAllTheThingsWithCompletion:(void(^)(BOOL))completion
 {
     
@@ -44,6 +53,12 @@
                                                               handler: ^(UIAlertAction * _Nonnull action)
                                         {
                                             [self.sharedDatastore deleteAllContext];
+                                            
+                                            [[NSOperationQueue mainQueue] addOperationWithBlock:^
+                                             {
+                                                 [self.tableView reloadData];
+                                                 
+                                             }];
                                         }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle: @"Cancel"
@@ -53,24 +68,23 @@
                                            [self dismissViewControllerAnimated: YES completion: nil];
                                            
                                        }];
+    
+    if (completion)
+    {
+        //[self.sharedDatastore fetchData];
+        
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^
+//         {
+//             [self.tableView reloadData];
+//             
+//         }];
+    }
 
     [areYouSureController addAction: areYouSureAction];
     [areYouSureController addAction: cancelAction];
     [self presentViewController: areYouSureController animated:YES completion:nil];
     
-    if (completion)
-    {
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^
-        {
-            [self.tableView reloadData];
-        }];
-    }
-}
-
--(void)TVreload
-{
-    [self.tableView reloadData];
-}
+   }
 
 - (void)didReceiveMemoryWarning
 {
