@@ -28,8 +28,6 @@
     [FISOMDBClient randomContentSearchWithCompletion: ^(NSMutableArray *movies)
      {
          self.movieCVArray = movies;
-        //NSLog(@"MOVIECVARRAY: %@", self.movieCVArray);
-         
          [[NSOperationQueue mainQueue] addOperationWithBlock:^
          {
                [self.collectionView reloadData];
@@ -147,14 +145,6 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
 {
     return 20;
 }
-
-//// COLLECTION VIEW MINIMUM INTERITEM SPACING (between views within collection)
-//- (CGFloat)collectionView: (UICollectionView *)collectionView
-//                   layout: (UICollectionViewLayout *)collectionViewLayout
-//minimumInteritemSpacingForSectionAtIndex: (NSInteger)section
-//{
-//    return 5;
-//}
 
 - (void)didReceiveMemoryWarning
 {

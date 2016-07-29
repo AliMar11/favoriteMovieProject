@@ -138,46 +138,18 @@
                                               error: &deleteError];
     [self fetchData];
 }
--(void)deleteOneEntryWithID:(NSString*)imbdID
+-(void)deleteOneEntryWithID:(DetailMovieObject*)movieObject
 {
-    NSLog(@"\n\nIMDBID!!!!-->%@\n\n\n", imbdID);
+    NSLog(@"\n\nCoreDataMovieObject-->%@\n\n\n", movieObject);
     
-    /*
-    
-    NSManagedObject *aManagedObject = ;
-   // NSManagedObjectContext *context = [aManagedObject managedObjectContext];
-    [context deleteObject: aManagedObject];
+    [self.managedObjectContext deleteObject: movieObject];
     NSError *error;
-    if (![context save:&error]) {
+    if (![self.managedObjectContext save:&error])
+    {
         // Handle the error.
     }
-     
-     */
     
-    /*
-    NSFetchRequest *entryFetch = [[NSFetchRequest alloc] init];
-    [entryFetch setEntity: [NSEntityDescription entityForName: @"MovieObject" inManagedObjectContext: self.managedObjectContext]];
-    
-    [entryFetch setPredicate: [NSPredicate predicateWithFormat: @"imbdID == %@", imbdID]];
-    
-    NSBatchDeleteResult *singleDeleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest: entryFetch];
-    
-    NSError *deleteError = nil;
-    [self.persistentStoreCoordinator executeRequest: singleDeleteRequest
-                                        withContext: self.managedObjectContext
-                                              error: &deleteError];
-    */
-
-    /*
-    NSEntityDescription *entity = [NSEntityDescription  insertNewObjectForEntityForName: @"MovieObject"
-                 inManagedObjectContext: self.managedObjectContext];
-    [entity setValue: imbdID forKey: @"imbdID"];
-    
-    NSLog(@"\n\nDO WE HAVE AN ENTITY OBJ???-->%@", entity);
-    //NSError *error;
-    [entity delete: self.managedObjectContext];
-    */
-    
+    [self saveContext];
     [self fetchData];
 
 }

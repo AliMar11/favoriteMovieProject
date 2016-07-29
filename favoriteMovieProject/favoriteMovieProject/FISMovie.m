@@ -10,6 +10,26 @@
 
 @implementation FISMovie : NSObject
 
+//-(instancetype) initWithTitle:(NSString *)title
+//                       poster:(NSString *)poster
+//                       imdbID:(NSString *)imdbID
+//{
+//    self = [super init];
+//    if (self) {
+//        _title = title;
+//        _poster = poster;
+//        _imdbID = imdbID;
+//    }
+//    
+//    return self;
+//    
+//}
+//
+//-(void)updateMovie:(NSDictionary *)dictionary {
+//    
+//    self.poster = dictionary[@"poster"];
+//}
+
 -(instancetype) initWithTitle:(NSString*) title
                        poster:(NSString*) poster
                        imdbID:(NSString*) imdbID
@@ -68,6 +88,7 @@
     }
     return self;
 }
+
 
 
 

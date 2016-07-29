@@ -43,7 +43,6 @@
     [backgroundView addSubview: blurEffectView];
     backgroundView.layer.zPosition = -5;
     
-    
     // Uncomment the following line to preserve selection between presentations.
      //self.clearsSelectionOnViewWillAppear = NO;
 }
@@ -59,10 +58,11 @@
 {
     
     UIAlertController *areYouSureController = [UIAlertController alertControllerWithTitle:@"Warning:"
-                                                                                  message:@"Are you sure you want to delete your favorites folder?" preferredStyle: UIAlertControllerStyleAlert];
+                         message:@"Are you sure you want to delete your favorites folder?" preferredStyle: UIAlertControllerStyleAlert];
+    
     UIAlertAction *areYouSureAction = [UIAlertAction actionWithTitle: @"OK"
-                                                                style: UIAlertActionStyleDestructive
-                                                              handler: ^(UIAlertAction * _Nonnull action)
+                                                               style: UIAlertActionStyleDestructive
+                                                             handler: ^(UIAlertAction * _Nonnull action)
                                         {
                                             [self.sharedDatastore deleteAllContext];
                                             
@@ -97,11 +97,10 @@
     [self presentViewController: areYouSureController animated:YES completion:nil];
 }
 
--(void)DeleteThisOneThing:(FISMovie*)movie
+-(void)DeleteThisOneThing:(DetailMovieObject *)movieObject
 {
-    NSLog(@"\n\nIs There a Movie Index?\n--->%@\n\n",movie);
-    NSString *imbdID = movie.imdbID;
-    [self.sharedDatastore deleteOneEntryWithID: imbdID];
+    NSLog(@"\n\nIs There a Movie Index?\n--->%@\n\n",movieObject);
+    [self.sharedDatastore deleteOneEntryWithID: movieObject];
     
 }
 
@@ -139,38 +138,36 @@
     cell.imageView.image = posterPicImage;
     cell.textLabel.text = aFavoritedMovie.title;
     cell.backgroundColor = [UIColor clearColor];
-    cell.preservesSuperviewLayoutMargins = NO;
-    cell.autoresizingMask = NO;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    [cell setSeparatorInset: UIEdgeInsetsMake(10, 0, 10, 0)];
+//    cell.preservesSuperviewLayoutMargins = NO;
+//    cell.autoresizingMask = NO;
+//    cell.layoutMargins = UIEdgeInsetsZero;
+//    [cell setSeparatorInset: UIEdgeInsetsMake(10, 0, 10, 0)];
     
     // No cell seperators = clean design
     //tableView.separatorColor = [UIColor clearColor];
     return cell;
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath*)indexPath
+// Change tableview row height:
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    return 300;
+//}
+
+- (BOOL)tableView: (UITableView *)tableView canEditRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    NSLog(@"%@", indexPath);
-    FISMovie *movie = [[FISMovie alloc] init];
-    movie = [self.sharedDatastore.movies objectAtIndex: indexPath.row];
-  //  [self DeleteThisOneThing: movie];
-    
-    return indexPath;
-}
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/
+
+-(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+         {
+            DetailMovieObject *movieObject = self.sharedDatastore.movies[indexPath.row];
+                // movie = [self.sharedDatastore.movies objectAtIndex: indexPath.row];
+               [self DeleteThisOneThing: movieObject];
+             [self.tableView reloadData];
+         }
+}
 
 @end

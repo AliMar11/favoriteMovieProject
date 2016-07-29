@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "FISMovie.h"
 #import "FISMovieObjectDataStore.h"
+#import "DetailMovieObject.h"
 
 @interface FISFavoritesTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+
 -(void)deleteAllTheThingsWithCompletion:(void(^)(BOOL))completion;
--(void)DeleteThisOneThing:(NSString*)movie;
+-(void)DeleteThisOneThing:(DetailMovieObject *)movieObject;
 
 @end

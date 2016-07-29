@@ -22,5 +22,5 @@
 -(void)saveContext;
 -(void)fetchData;
 -(void)deleteAllContext;
--(void)deleteOneEntryWithID:(NSString*)imbdID;
+-(void)deleteOneEntryWithID: (DetailMovieObject*)movieObject;
 @end
