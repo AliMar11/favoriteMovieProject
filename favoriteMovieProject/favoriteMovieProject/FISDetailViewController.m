@@ -59,7 +59,7 @@
     //background Image View setup
     UIImageView *posterPictureView =[[UIImageView alloc]initWithImage: dataAsImage];
     
-    UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleExtraLight];
+    UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
     UIVisualEffectView *visualViewBlur = [[UIVisualEffectView alloc] initWithEffect: backgroundBlurEffect];
     visualViewBlur.frame = self.view.bounds;
     
@@ -76,7 +76,7 @@
 
 - (void)updateMovieWithDictionary: (NSDictionary *)desiredDictionary
 {
-    NSLog(@"updating the init method with detail data");
+    NSLog(@"updating the movieObject with detail data");
     self.seguedMovie.releaseDate = [desiredDictionary valueForKey: @"Released"];
     self.seguedMovie.actors = [desiredDictionary valueForKey: @"Actors"];
     self.seguedMovie.director = [desiredDictionary valueForKey: @"Director"];
@@ -85,6 +85,7 @@
     self.seguedMovie.filmRating = [desiredDictionary valueForKey: @"Rated"];
     self.seguedMovie.type = [desiredDictionary valueForKey: @"Type"];
     self.seguedMovie.imdbScore = [desiredDictionary valueForKey: @"imdbRating"];
+    self.seguedMovie.imdbID = [desiredDictionary valueForKey: @"imdbID"];
     
     NSLog(@"%@", self.seguedMovie);
     [self displayMovieInfo];
@@ -99,7 +100,7 @@
     self.descriptionTextbox.text = [NSString stringWithFormat: @"Plot:%@",self.seguedMovie.plot];
 
     self.typeTextfield.borderStyle = UITextBorderStyleNone;
-    self.typeTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];//here offerTitle is the instance of `UILabel`
+    self.typeTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
     self.genreTextfield.borderStyle = UITextBorderStyleNone;
     self.genreTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
     self.filmRatingTexfield.borderStyle = UITextBorderStyleNone;
@@ -118,6 +119,7 @@
     newFavoriteMovie.genre = self.genreTextfield.text;
     newFavoriteMovie.type = self.typeTextfield.text;
     newFavoriteMovie.plot = self.descriptionTextbox.text;
+    newFavoriteMovie.type = self.typeTextfield.text;
     
     newFavoriteMovie.actors = self.seguedMovie.actors;
     newFavoriteMovie.director = self.seguedMovie.director;
@@ -125,13 +127,12 @@
     newFavoriteMovie.poster = self.seguedMovie.poster;
     newFavoriteMovie.releaseDate = self.seguedMovie.releaseDate;
     newFavoriteMovie.runTime = self.seguedMovie.runTime;
-    newFavoriteMovie.type = self.typeTextfield.text;
+    newFavoriteMovie.imdbID = self.seguedMovie.imdbID;
     
    [[NSOperationQueue mainQueue] addOperationWithBlock:^
     {
          [self.sharedDataStore saveContext];
     }];
-  
 }
 
 -(void)moreInfoButtonTapped

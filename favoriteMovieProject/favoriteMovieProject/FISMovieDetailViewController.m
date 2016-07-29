@@ -45,7 +45,7 @@
     //background Image setup
     UIImageView *backgroundPicture = [[UIImageView alloc] initWithImage: posterImage];
     backgroundPicture.frame = self.view.bounds;
-    UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleExtraLight];
+    UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
     UIVisualEffectView *visualViewBlur = [[UIVisualEffectView alloc] initWithEffect: backgroundBlurEffect];
     visualViewBlur.frame = self.view.bounds;
  

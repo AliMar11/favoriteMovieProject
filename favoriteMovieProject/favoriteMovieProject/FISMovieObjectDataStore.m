@@ -12,7 +12,6 @@
 @end
 
 @implementation FISMovieObjectDataStore
-
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -79,14 +78,12 @@
     {
         return _persistentStoreCoordinator;
     }
-    
     // Create the coordinator and store
-    
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent: @"FavoriteMovieProject.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType configuration: nil URL: storeURL options:nil error:&error])
+    if (![_persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType configuration: nil URL: storeURL options: nil error: &error])
     {
         // Report any error.
         
@@ -106,7 +103,7 @@
     return _persistentStoreCoordinator;
 }
 
-- (void)saveContext
+-(void)saveContext
 {
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil)
@@ -132,14 +129,57 @@
 
 -(void)deleteAllContext
 {
-    NSFetchRequest * deleteRequest = [[NSFetchRequest alloc] initWithEntityName: @"MovieObject"];
-    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest: deleteRequest];
+    NSFetchRequest * deleteFetchRequest = [[NSFetchRequest alloc] initWithEntityName: @"MovieObject"];
+    NSBatchDeleteRequest *delete = [[NSBatchDeleteRequest alloc] initWithFetchRequest: deleteFetchRequest];
     
     NSError *deleteError = nil;
     [self.persistentStoreCoordinator executeRequest: delete
                                         withContext: self.managedObjectContext
                                               error: &deleteError];
     [self fetchData];
+}
+-(void)deleteOneEntryWithID:(NSString*)imbdID
+{
+    NSLog(@"\n\nIMDBID!!!!-->%@\n\n\n", imbdID);
+    
+    /*
+    
+    NSManagedObject *aManagedObject = ;
+   // NSManagedObjectContext *context = [aManagedObject managedObjectContext];
+    [context deleteObject: aManagedObject];
+    NSError *error;
+    if (![context save:&error]) {
+        // Handle the error.
+    }
+     
+     */
+    
+    /*
+    NSFetchRequest *entryFetch = [[NSFetchRequest alloc] init];
+    [entryFetch setEntity: [NSEntityDescription entityForName: @"MovieObject" inManagedObjectContext: self.managedObjectContext]];
+    
+    [entryFetch setPredicate: [NSPredicate predicateWithFormat: @"imbdID == %@", imbdID]];
+    
+    NSBatchDeleteResult *singleDeleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest: entryFetch];
+    
+    NSError *deleteError = nil;
+    [self.persistentStoreCoordinator executeRequest: singleDeleteRequest
+                                        withContext: self.managedObjectContext
+                                              error: &deleteError];
+    */
+
+    /*
+    NSEntityDescription *entity = [NSEntityDescription  insertNewObjectForEntityForName: @"MovieObject"
+                 inManagedObjectContext: self.managedObjectContext];
+    [entity setValue: imbdID forKey: @"imbdID"];
+    
+    NSLog(@"\n\nDO WE HAVE AN ENTITY OBJ???-->%@", entity);
+    //NSError *error;
+    [entity delete: self.managedObjectContext];
+    */
+    
+    [self fetchData];
+
 }
 
 @end

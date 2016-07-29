@@ -11,7 +11,8 @@
 @end
 
 @implementation FISOMDBClient
-+ (void)randomContentSearchWithCompletion:(void (^)(NSMutableArray * movies))getMethCompletion
+
++(void)randomContentSearchWithCompletion: (void (^)(NSMutableArray * movies))getMethCompletion
 {
     NSLog(@"inside 'randomContentSearch' method in OMBDClient");
     
@@ -54,7 +55,7 @@
         }];
 }
 
-+ (void)getRepositoriesWithKeyword: (NSString *)keyword completion: (void (^)(NSMutableArray * movies))getMethCompletion
++(void)getRepositoriesWithKeyword: (NSString *)keyword completion: (void (^)(NSMutableArray * movies))getMethCompletion
 {
     NSString *OMDBString = [NSString stringWithFormat: @"http://www.omdbapi.com/?s=%@&page=1", keyword];
     NSLog(@"OMBD GET method URL: %@", OMDBString);
@@ -85,41 +86,34 @@
     }];
 }
 
-+ (void)getMovieDetailWithMovieID: (NSString *)imdbID completion:(void (^)(NSDictionary *desiredDictionary))getMethCompletion
++(void)getMovieDetailWithMovieID: (NSString *)imdbID completion:(void (^)(NSDictionary *desiredDictionary))getMethCompletion
 {
     NSString *OMBDString = [NSString stringWithFormat: @"http://www.omdbapi.com/?i=%@&plot=full&r=json", imdbID];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
-    [manager GET:OMBDString parameters: nil progress: nil success: ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    [manager GET: OMBDString parameters: nil progress: nil success: ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
-        NSLog(@"\n\nSUCCESSSSSSS....in grabbing detail info on a selected movieObject!\n\n");
-        NSMutableArray *completeMovieArray = [[NSMutableArray alloc]init];
-        
+       // NSMutableArray *completeMovieArray = [[NSMutableArray alloc]init];
         NSMutableDictionary *responseDictionary = [[NSMutableDictionary alloc]init];
         responseDictionary = [responseObject mutableCopy];
         
-        NSArray *undesiredKeys = [[NSArray alloc]initWithObjects:@"imdbVotes", @"Writer", @"Response",@"totalSeasons", @"Year", @"Metascore", @"Language", @"Country", @"Awards", nil];
+        NSArray *undesiredKeys = [[NSArray alloc]initWithObjects: @"imdbVotes", @"Writer", @"Response", @"totalSeasons", @"Year", @"Metascore", @"Language", @"Country", @"Awards", nil];
         
         [responseDictionary removeObjectsForKeys: undesiredKeys];
-        NSLog(@"FINITO FOOLS!!\nundesiredKeys-->%@\ndetailArray-->%@\n", undesiredKeys, responseDictionary);
-        
         NSDictionary *desiredDictionary = [[NSDictionary alloc] initWithDictionary: responseDictionary];
 
-            NSLog(@"THE DETAILED THING-->%@",completeMovieArray);
-            // }
-        
         getMethCompletion(desiredDictionary);
     }
-               failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+               failure: ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
                {
                    NSLog(@"\n\nFAILURE IN CLIENT CLASS DURING 'GETMOVIEDETAIL' METHOD\n\n");
                    //***incoorporate some really real error handling ;)
                }];
 }
 
-+ (void) moreMoviesSaidTheUser: (NSString*)nextPageKeyword
++(void) moreMoviesSaidTheUser: (NSString*)nextPageKeyword
 {
-    [FISOMDBClient getRepositoriesWithKeyword: nextPageKeyword completion:^(NSMutableArray *movies)
+    [FISOMDBClient getRepositoriesWithKeyword: nextPageKeyword completion: ^(NSMutableArray *movies)
     {
 
     }];

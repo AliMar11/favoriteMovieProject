@@ -11,7 +11,6 @@
 @interface FISFavoritesTableViewController ()
 
 @property (nonatomic, strong) FISMovieObjectDataStore *sharedDatastore;
-
 @end
 
 @implementation FISFavoritesTableViewController
@@ -20,28 +19,41 @@
 {
     [super viewDidLoad];
     
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"detailMovieCell"];
     self.sharedDatastore = [FISMovieObjectDataStore sharedDataStore];
     [self.sharedDatastore fetchData];
-    //[self.tableView reloadData];
-    
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"detailMovieCell"];
+    NSLog(@"\n\nFAV MOVIES:\n%@\n\n", self.sharedDatastore.movies);
 
-    UIBarButtonItem *deleteAllFavorites = [[UIBarButtonItem alloc] initWithTitle: @"Delete All" style:UIBarButtonItemStylePlain target: self action: @selector(deleteAllTheThingsWithCompletion:)];
-    
+    UIBarButtonItem *deleteAllFavorites = [[UIBarButtonItem alloc] initWithTitle: @"Delete All"
+                                                                           style:UIBarButtonItemStylePlain
+                                                                          target: self
+                                                                          action: @selector(deleteAllTheThingsWithCompletion:)];
     self.navigationItem.leftBarButtonItem = deleteAllFavorites;
     
-    NSLog(@"\n\nFAV MOVIES:\n%@\n\n", self.sharedDatastore.movies);
+    
+    UIImageView *backgroundView = [[UIImageView alloc] init];
+    backgroundView.image = [UIImage imageNamed: @"star3"];
+    backgroundView.frame = self.view.bounds;
+    
+    [self.view addSubview: backgroundView];
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
+    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect: blurEffect];
+    blurEffectView.frame = self.view.bounds;
+    [backgroundView addSubview: blurEffectView];
+    backgroundView.layer.zPosition = -5;
+    
+    
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+     //self.clearsSelectionOnViewWillAppear = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     [self.sharedDatastore fetchData];
     [self.tableView reloadData];
-
 }
+
 
 -(void)deleteAllTheThingsWithCompletion:(void(^)(BOOL))completion
 {
@@ -83,8 +95,15 @@
     [areYouSureController addAction: areYouSureAction];
     [areYouSureController addAction: cancelAction];
     [self presentViewController: areYouSureController animated:YES completion:nil];
+}
+
+-(void)DeleteThisOneThing:(FISMovie*)movie
+{
+    NSLog(@"\n\nIs There a Movie Index?\n--->%@\n\n",movie);
+    NSString *imbdID = movie.imdbID;
+    [self.sharedDatastore deleteOneEntryWithID: imbdID];
     
-   }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -119,11 +138,25 @@
 
     cell.imageView.image = posterPicImage;
     cell.textLabel.text = aFavoritedMovie.title;
-
+    cell.backgroundColor = [UIColor clearColor];
+    cell.preservesSuperviewLayoutMargins = NO;
+    cell.autoresizingMask = NO;
+    cell.layoutMargins = UIEdgeInsetsZero;
+    [cell setSeparatorInset: UIEdgeInsetsMake(10, 0, 10, 0)];
+    
     // No cell seperators = clean design
     //tableView.separatorColor = [UIColor clearColor];
-    
     return cell;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    NSLog(@"%@", indexPath);
+    FISMovie *movie = [[FISMovie alloc] init];
+    movie = [self.sharedDatastore.movies objectAtIndex: indexPath.row];
+  //  [self DeleteThisOneThing: movie];
+    
+    return indexPath;
 }
 
 /*

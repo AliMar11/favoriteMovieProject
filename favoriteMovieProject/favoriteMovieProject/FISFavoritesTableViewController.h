@@ -10,11 +10,8 @@
 #import "FISMovie.h"
 #import "FISMovieObjectDataStore.h"
 
-@interface FISFavoritesTableViewController : UITableViewController <UITableViewDelegate>
-
+@interface FISFavoritesTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 -(void)deleteAllTheThingsWithCompletion:(void(^)(BOOL))completion;
--(void)TVreload;
-
-
+-(void)DeleteThisOneThing:(NSString*)movie;
 
 @end

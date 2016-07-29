@@ -2,7 +2,7 @@
 //  DetailMovieObject+CoreDataProperties.h
 //  favoriteMovieProject
 //
-//  Created by Alicia Marisal on 7/19/16.
+//  Created by Alicia Marisal on 7/28/16.
 //  Copyright © 2016 Alicia Marisal. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *runTime;
 @property (nullable, nonatomic, retain) NSString *title;
 @property (nullable, nonatomic, retain) NSString *type;
+@property (nullable, nonatomic, retain) NSString *imdbID;
 
 @end
 

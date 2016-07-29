@@ -5,6 +5,7 @@
         <attribute name="director" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="filmRating" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="genre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imdbID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imdbScore" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="plot" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="poster" optional="YES" attributeType="String" syncable="YES"/>
@@ -14,6 +15,6 @@
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MovieObject" positionX="-63" positionY="-9" width="128" height="210"/>
+        <element name="MovieObject" positionX="-63" positionY="-9" width="128" height="225"/>
     </elements>
 </model>

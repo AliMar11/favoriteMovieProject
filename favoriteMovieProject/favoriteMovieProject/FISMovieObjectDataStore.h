@@ -15,7 +15,6 @@
 @property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
 @property (nonatomic, strong) NSArray *movies;
 
 +(instancetype) sharedDataStore;
@@ -23,6 +22,5 @@
 -(void)saveContext;
 -(void)fetchData;
 -(void)deleteAllContext;
-
-
+-(void)deleteOneEntryWithID:(NSString*)imbdID;
 @end

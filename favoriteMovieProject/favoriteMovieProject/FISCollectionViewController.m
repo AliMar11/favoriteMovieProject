@@ -54,8 +54,8 @@
     self.navigationItem.rightBarButtonItem = searchButton;
     
     UIView *backgroundViewForCollectionView=[[UIView alloc]init];
-    [backgroundViewForCollectionView setBackgroundColor:[UIColor colorWithPatternImage:
-                                                         [UIImage imageNamed:@"colorTriangles"]]];
+    [backgroundViewForCollectionView setBackgroundColor: [UIColor colorWithPatternImage:
+                                                         [UIImage imageNamed: @"colorTriangles"]]];
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect: blurEffect];
@@ -64,6 +64,7 @@
     
     [backgroundViewForCollectionView addSubview: blurEffectView];
     [self.collectionView setBackgroundView: backgroundViewForCollectionView];
+   
     //***set constraints for backroundVC For CollectionVC image
     
     // Uncomment the following line to preserve selection between presentations
