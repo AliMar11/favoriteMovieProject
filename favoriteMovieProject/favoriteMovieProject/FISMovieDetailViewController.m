@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *runTimeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *typeTextField;
 @property (weak, nonatomic) IBOutlet UITextView *plotTextView;
-
 @end
 
 @implementation FISMovieDetailViewController
@@ -28,6 +27,14 @@
     [super viewDidLoad];
     NSLog(@"MOVIE:\n%@", self.movie);
     
+    [self setUpTheOutlets];
+    [self setUpTheImage];
+}
+
+#pragma mark- leLook
+
+-(void)setUpTheOutlets
+{
     self.directorTextField.text = [NSString stringWithFormat: @" Director: %@", self.movie.director];
     self.actorsTextField.text = [NSString stringWithFormat: @" Actors: %@", self.movie.actors];
     self.genreTextField.text = [NSString stringWithFormat: @" Genre: %@", self.movie.genre];
@@ -37,18 +44,20 @@
     self.runTimeTextField.text = [NSString stringWithFormat: @" Runtime: %@", self.movie.runTime];
     self.typeTextField.text = [NSString stringWithFormat: @" Entertaiment Type: %@", self.movie.type];
     self.plotTextView.text = [NSString stringWithFormat: @" Plot: %@", self.movie.plot];
-    
+}
+
+-(void)setUpTheImage
+{
     NSURL *posterURL = [[NSURL alloc] initWithString: self.movie.poster];
     NSData *posterData = [[NSData alloc]initWithContentsOfURL: posterURL];
     UIImage *posterImage = [[UIImage alloc] initWithData: posterData];
     
-    //background Image setup
     UIImageView *backgroundPicture = [[UIImageView alloc] initWithImage: posterImage];
     backgroundPicture.frame = self.view.bounds;
     UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
     UIVisualEffectView *visualViewBlur = [[UIVisualEffectView alloc] initWithEffect: backgroundBlurEffect];
     visualViewBlur.frame = self.view.bounds;
- 
+    
     [backgroundPicture addSubview: visualViewBlur];
     [self.view addSubview: backgroundPicture];
     backgroundPicture.layer.zPosition = -5;

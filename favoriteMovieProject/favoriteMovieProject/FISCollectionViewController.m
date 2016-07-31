@@ -34,35 +34,9 @@
          }];
      }];
     
-    self.searchBar = [[UISearchBar alloc] init];
-    self.searchBar.delegate = self;
-    self.navigationItem.titleView = self.searchBar;
-    self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    self.searchBar.placeholder = @"Find movies, TV shows and more...";
-    self.searchBar.tintColor = [UIColor blueColor];
-    self.searchBar.barTintColor = [UIColor lightGrayColor];
-    self.searchBar.showsSearchResultsButton = YES;
-    self.searchBar.searchResultsButtonSelected = YES;
+    [self createSearchBar];
+    [self createBlurView];
     
-    //search button time!!
-    UIBarButtonItem *searchButton= [[UIBarButtonItem alloc] initWithTitle:@"Search!"
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(searchButtonTapped)];
-    self.navigationItem.rightBarButtonItem = searchButton;
-    
-    UIView *backgroundViewForCollectionView=[[UIView alloc]init];
-    [backgroundViewForCollectionView setBackgroundColor: [UIColor colorWithPatternImage:
-                                                         [UIImage imageNamed: @"colorTriangles"]]];
-    
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect: blurEffect];
-    blurEffectView.frame = self.view.bounds;
-    blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    [backgroundViewForCollectionView addSubview: blurEffectView];
-    [self.collectionView setBackgroundView: backgroundViewForCollectionView];
-   
     //***set constraints for backroundVC For CollectionVC image
     
     // Uncomment the following line to preserve selection between presentations
@@ -119,6 +93,43 @@
     {
         [self.collectionView reloadData];
     }];
+}
+
+#pragma mark <leLook>
+
+-(void)createSearchBar
+{
+    self.searchBar = [[UISearchBar alloc] init];
+    self.searchBar.delegate = self;
+    self.navigationItem.titleView = self.searchBar;
+    self.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    self.searchBar.placeholder = @"Find movies, TV shows and more...";
+    self.searchBar.tintColor = [UIColor blueColor];
+    self.searchBar.barTintColor = [UIColor lightGrayColor];
+    self.searchBar.showsSearchResultsButton = YES;
+    self.searchBar.searchResultsButtonSelected = YES;
+    
+    //search button time!!
+    UIBarButtonItem *searchButton= [[UIBarButtonItem alloc] initWithTitle:@"Search!"
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(searchButtonTapped)];
+    self.navigationItem.rightBarButtonItem = searchButton;
+}
+
+-(void)createBlurView
+{
+    UIView *backgroundViewForCollectionView=[[UIView alloc]init];
+    [backgroundViewForCollectionView setBackgroundColor: [UIColor colorWithPatternImage:
+                                                          [UIImage imageNamed: @"colorTriangles"]]];
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect: blurEffect];
+    blurEffectView.frame = self.view.bounds;
+    blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    [backgroundViewForCollectionView addSubview: blurEffectView];
+    [self.collectionView setBackgroundView: backgroundViewForCollectionView];
 }
 
 ////// ITEM SIZE of items inside collection view

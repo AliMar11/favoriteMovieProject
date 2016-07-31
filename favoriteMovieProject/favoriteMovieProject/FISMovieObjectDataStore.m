@@ -138,7 +138,7 @@
                                               error: &deleteError];
     [self fetchData];
 }
--(void)deleteOneEntryWithID:(DetailMovieObject*)movieObject
+-(void)deleteOneMovieInstance:(DetailMovieObject*)movieObject
 {
     NSLog(@"\n\nCoreDataMovieObject-->%@\n\n\n", movieObject);
     
@@ -147,11 +147,11 @@
     if (![self.managedObjectContext save:&error])
     {
         // Handle the error.
+        NSLog(@"Could not ");
     }
     
     [self saveContext];
     [self fetchData];
-
 }
 
 @end

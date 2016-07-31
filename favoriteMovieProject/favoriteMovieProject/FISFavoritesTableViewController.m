@@ -24,24 +24,8 @@
     [self.sharedDatastore fetchData];
     NSLog(@"\n\nFAV MOVIES:\n%@\n\n", self.sharedDatastore.movies);
 
-    UIBarButtonItem *deleteAllFavorites = [[UIBarButtonItem alloc] initWithTitle: @"Delete All"
-                                                                           style:UIBarButtonItemStylePlain
-                                                                          target: self
-                                                                          action: @selector(deleteAllTheThingsWithCompletion:)];
-    self.navigationItem.leftBarButtonItem = deleteAllFavorites;
-    
-    
-    UIImageView *backgroundView = [[UIImageView alloc] init];
-    backgroundView.image = [UIImage imageNamed: @"star3"];
-    backgroundView.frame = self.view.bounds;
-    
-    [self.view addSubview: backgroundView];
-    
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
-    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect: blurEffect];
-    blurEffectView.frame = self.view.bounds;
-    [backgroundView addSubview: blurEffectView];
-    backgroundView.layer.zPosition = -5;
+    [self deleteFavoriteMoviesButton];
+    [self setUpTheImage];
     
     // Uncomment the following line to preserve selection between presentations.
      //self.clearsSelectionOnViewWillAppear = NO;
@@ -53,8 +37,7 @@
     [self.tableView reloadData];
 }
 
-
--(void)deleteAllTheThingsWithCompletion:(void(^)(BOOL))completion
+-(void)deleteAllTheThings
 {
     
     UIAlertController *areYouSureController = [UIAlertController alertControllerWithTitle:@"Warning:"
@@ -64,13 +47,16 @@
                                                                style: UIAlertActionStyleDestructive
                                                              handler: ^(UIAlertAction * _Nonnull action)
                                         {
+                                            
                                             [self.sharedDatastore deleteAllContext];
                                             
                                             [[NSOperationQueue mainQueue] addOperationWithBlock:^
                                              {
+                                                 [self.sharedDatastore fetchData];
                                                  [self.tableView reloadData];
                                                  
                                              }];
+
                                         }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle: @"Cancel"
@@ -80,17 +66,6 @@
                                            [self dismissViewControllerAnimated: YES completion: nil];
                                            
                                        }];
-    
-    if (completion)
-    {
-        //[self.sharedDatastore fetchData];
-        
-//        [[NSOperationQueue mainQueue] addOperationWithBlock:^
-//         {
-//             [self.tableView reloadData];
-//             
-//         }];
-    }
 
     [areYouSureController addAction: areYouSureAction];
     [areYouSureController addAction: cancelAction];
@@ -100,13 +75,41 @@
 -(void)DeleteThisOneThing:(DetailMovieObject *)movieObject
 {
     NSLog(@"\n\nIs There a Movie Index?\n--->%@\n\n",movieObject);
-    [self.sharedDatastore deleteOneEntryWithID: movieObject];
+    [self.sharedDatastore deleteOneMovieInstance: movieObject];
     
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+
+-(void)deleteFavoriteMoviesButton
+{
+    UIBarButtonItem *deleteAllFavorites = [[UIBarButtonItem alloc] initWithTitle: @"Delete All"
+                                                                           style:UIBarButtonItemStylePlain
+                                                                          target: self
+                                                                          action: @selector(deleteAllTheThings)];
+    self.navigationItem.leftBarButtonItem = deleteAllFavorites;
+
+}
+
+#pragma mark -leLook
+-(void)setUpTheImage
+{
+    UIImageView *backgroundView = [[UIImageView alloc] init];
+    backgroundView.image = [UIImage imageNamed: @"star3"];
+    backgroundView.frame = self.view.bounds;
+    
+    [self.view addSubview: backgroundView];
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
+    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect: blurEffect];
+    blurEffectView.frame = self.view.bounds;
+    [backgroundView addSubview: blurEffectView];
+    backgroundView.layer.zPosition = -5;
+
 }
 
 #pragma mark - Table view data source
@@ -127,7 +130,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"detailMovieCell" forIndexPath: indexPath];
     
     NSArray *favoritedMovies = self.sharedDatastore.movies;
-    NSLog(@"");
     FISMovie *aFavoritedMovie = favoritedMovies[indexPath.row];
     
     NSLog(@"\n\nFISMOVIE OBJECT:\n%@\n\n", aFavoritedMovie.poster);
@@ -138,17 +140,12 @@
     cell.imageView.image = posterPicImage;
     cell.textLabel.text = aFavoritedMovie.title;
     cell.backgroundColor = [UIColor clearColor];
-//    cell.preservesSuperviewLayoutMargins = NO;
-//    cell.autoresizingMask = NO;
-//    cell.layoutMargins = UIEdgeInsetsZero;
-//    [cell setSeparatorInset: UIEdgeInsetsMake(10, 0, 10, 0)];
-    
+
     // No cell seperators = clean design
     //tableView.separatorColor = [UIColor clearColor];
     return cell;
 }
 
-// Change tableview row height:
 //-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    
 //    return 300;

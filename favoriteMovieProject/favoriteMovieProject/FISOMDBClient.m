@@ -73,7 +73,6 @@
             FISMovie *movieObjectMeat = [[FISMovie alloc] initWithTitle: movieObject[@"Title"]
                                                                  poster: movieObject[@"Poster"]
                                                                  imdbID: movieObject[@"imdbID"]];
-            
             [movies addObject: movieObjectMeat];
         }
         
@@ -115,7 +114,7 @@
 {
     [FISOMDBClient getRepositoriesWithKeyword: nextPageKeyword completion: ^(NSMutableArray *movies)
     {
-
+        //show the thing ^_^
     }];
 }
 

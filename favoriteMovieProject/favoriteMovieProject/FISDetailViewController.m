@@ -30,17 +30,12 @@
 
     self.sharedDataStore = [FISMovieObjectDataStore sharedDataStore];
     
-    UIBarButtonItem *favortiesFolder = [[UIBarButtonItem alloc] initWithTitle: @"Favs"
-                                                                        style: UIBarButtonItemStyleDone
-                                                                       target: self
-                                                                       action: @selector(saveMovieObject)];
-    self.navigationItem.rightBarButtonItem = favortiesFolder;
+    [self createFavoritesTab];
     
     NSString *imdbID = self.seguedMovie.imdbID;
     [FISOMDBClient getMovieDetailWithMovieID: imdbID completion:^(NSDictionary *desiredDictionary)
      {
         NSLog(@"\n\nWE'VE ENTERED THE GETMOVIEDETAIL RESPONSE \n\ndesiredDictionary:\n%@\n\n", desiredDictionary);
-        
          [self updateMovieWithDictionary: (NSDictionary*) desiredDictionary];
          
     } ];
@@ -98,7 +93,7 @@
     self.genreTextfield.text = [NSString stringWithFormat: @"  Type:  %@", self.seguedMovie.type];
     self.filmRatingTexfield.text = [NSString stringWithFormat:@"  Rating:  %@", self.seguedMovie.filmRating];
     self.descriptionTextbox.text = [NSString stringWithFormat: @"Plot:%@",self.seguedMovie.plot];
-
+    
     self.typeTextfield.borderStyle = UITextBorderStyleNone;
     self.typeTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
     self.genreTextfield.borderStyle = UITextBorderStyleNone;
@@ -111,9 +106,9 @@
 -(void)saveMovieObject
 {
     NSLog(@"\n\nEntered savingFavMovie Method\n\n");
-
+    
     DetailMovieObject *newFavoriteMovie = [NSEntityDescription insertNewObjectForEntityForName: @"MovieObject" inManagedObjectContext: self.sharedDataStore.managedObjectContext];
-   
+    
     newFavoriteMovie.title = self.navigationItem.title;
     newFavoriteMovie.filmRating = self.filmRatingTexfield.text;
     newFavoriteMovie.genre = self.genreTextfield.text;
@@ -129,16 +124,27 @@
     newFavoriteMovie.runTime = self.seguedMovie.runTime;
     newFavoriteMovie.imdbID = self.seguedMovie.imdbID;
     
-   [[NSOperationQueue mainQueue] addOperationWithBlock:^
-    {
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^
+     {
          [self.sharedDataStore saveContext];
-    }];
+     }];
 }
 
 -(void)moreInfoButtonTapped
 {
     NSLog(@"More information ButttonTapped!");
     [self performSegueWithIdentifier: @"detailInfoSegue" sender: self];
+}
+
+#pragma mark- leLook
+
+-(void)createFavoritesTab
+{
+    UIBarButtonItem *favortiesTab = [[UIBarButtonItem alloc] initWithTitle: @"Favs"
+                                                                        style: UIBarButtonItemStyleDone
+                                                                       target: self
+                                                                       action: @selector(saveMovieObject)];
+    self.navigationItem.rightBarButtonItem = favortiesTab;
 }
 
 #pragma mark - Navigation

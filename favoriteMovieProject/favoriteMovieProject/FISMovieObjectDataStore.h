@@ -22,5 +22,5 @@
 -(void)saveContext;
 -(void)fetchData;
 -(void)deleteAllContext;
--(void)deleteOneEntryWithID: (DetailMovieObject*)movieObject;
+-(void)deleteOneMovieInstance:(DetailMovieObject*)movieObject;
 @end
