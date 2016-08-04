@@ -8,7 +8,7 @@
 
 #import "FISFavoritesTableViewController.h"
 
-@interface FISFavoritesTableViewController ()
+@interface FISFavoritesTableViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) FISMovieObjectDataStore *sharedDatastore;
 @end
@@ -19,20 +19,21 @@
 {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"detailMovieCell"];
+    
     self.sharedDatastore = [FISMovieObjectDataStore sharedDataStore];
     [self.sharedDatastore fetchData];
-    NSLog(@"\n\nFAV MOVIES:\n%@\n\n", self.sharedDatastore.movies);
-
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"detailMovieCell"];
+    
     [self deleteFavoriteMoviesButton];
     [self setUpTheImage];
     
     // Uncomment the following line to preserve selection between presentations.
-     //self.clearsSelectionOnViewWillAppear = NO;
+    //self.clearsSelectionOnViewWillAppear = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear: YES];
     [self.sharedDatastore fetchData];
     [self.tableView reloadData];
 }
@@ -41,32 +42,32 @@
 {
     
     UIAlertController *areYouSureController = [UIAlertController alertControllerWithTitle:@"Warning:"
-                         message:@"Are you sure you want to delete your favorites folder?" preferredStyle: UIAlertControllerStyleAlert];
+                                                                                  message:@"Are you sure you want to delete your favorites folder?" preferredStyle: UIAlertControllerStyleAlert];
     
     UIAlertAction *areYouSureAction = [UIAlertAction actionWithTitle: @"OK"
                                                                style: UIAlertActionStyleDestructive
                                                              handler: ^(UIAlertAction * _Nonnull action)
-                                        {
-                                            
-                                            [self.sharedDatastore deleteAllContext];
-                                            
-                                            [[NSOperationQueue mainQueue] addOperationWithBlock:^
-                                             {
-                                                 [self.sharedDatastore fetchData];
-                                                 [self.tableView reloadData];
-                                                 
-                                             }];
-
-                                        }];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle: @"Cancel"
-                                                               style: UIAlertActionStyleCancel
-                                                             handler: ^(UIAlertAction * _Nonnull action)
                                        {
-                                           [self dismissViewControllerAnimated: YES completion: nil];
+                                           
+                                           [self.sharedDatastore deleteAllContext];
+                                           
+                                           [[NSOperationQueue mainQueue] addOperationWithBlock:^
+                                            {
+                                                [self.sharedDatastore fetchData];
+                                                [self.tableView reloadData];
+                                                
+                                            }];
                                            
                                        }];
-
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle: @"Cancel"
+                                                           style: UIAlertActionStyleCancel
+                                                         handler: ^(UIAlertAction * _Nonnull action)
+                                   {
+                                       [self dismissViewControllerAnimated: YES completion: nil];
+                                       
+                                   }];
+    
     [areYouSureController addAction: areYouSureAction];
     [areYouSureController addAction: cancelAction];
     [self presentViewController: areYouSureController animated:YES completion:nil];
@@ -74,16 +75,8 @@
 
 -(void)DeleteThisOneThing:(DetailMovieObject *)movieObject
 {
-    NSLog(@"\n\nIs There a Movie Index?\n--->%@\n\n",movieObject);
     [self.sharedDatastore deleteOneMovieInstance: movieObject];
-    
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
 
 -(void)deleteFavoriteMoviesButton
 {
@@ -92,7 +85,6 @@
                                                                           target: self
                                                                           action: @selector(deleteAllTheThings)];
     self.navigationItem.leftBarButtonItem = deleteAllFavorites;
-
 }
 
 #pragma mark -leLook
@@ -109,7 +101,7 @@
     blurEffectView.frame = self.view.bounds;
     [backgroundView addSubview: blurEffectView];
     backgroundView.layer.zPosition = -5;
-
+    
 }
 
 #pragma mark - Table view data source
@@ -136,20 +128,26 @@
     NSURL *NSURLPic = [NSURL URLWithString: aFavoritedMovie.poster];
     NSData *picData = [[NSData alloc] initWithContentsOfURL: NSURLPic];
     UIImage *posterPicImage = [UIImage imageWithData: picData];
-
+    
     cell.imageView.image = posterPicImage;
+    cell.imageView.clipsToBounds = YES;
+    
+    //cell.contentMode = UIViewContentModeScaleAspectFill;
+    //self.tableView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    
     cell.textLabel.text = aFavoritedMovie.title;
     cell.backgroundColor = [UIColor clearColor];
-
+    
     // No cell seperators = clean design
     //tableView.separatorColor = [UIColor clearColor];
     return cell;
 }
 
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    return 300;
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 180;
+}
 
 - (BOOL)tableView: (UITableView *)tableView canEditRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
@@ -159,12 +157,16 @@
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
-         {
-            DetailMovieObject *movieObject = self.sharedDatastore.movies[indexPath.row];
-                // movie = [self.sharedDatastore.movies objectAtIndex: indexPath.row];
-               [self DeleteThisOneThing: movieObject];
-             [self.tableView reloadData];
-         }
+    {
+        DetailMovieObject *movieObject = self.sharedDatastore.movies[indexPath.row];
+        [self DeleteThisOneThing: movieObject];
+        [self.tableView reloadData];
+    }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
 }
 
 @end

@@ -5,18 +5,17 @@
 //  Created by Alicia Marisal on 6/22/16.
 //  Copyright © 2016 Alicia Marisal. All rights reserved.
 //
-#import "DetailMovieObject.h"
 #import <UIKit/UIKit.h>
-#import "FISMovieObjectDataStore.h"
 #import "FISMovie.h"
+#import "DetailMovieObject.h"
+#import "FISMovieObjectDataStore.h"
 #import "FISOMDBClient.h"
 
 @interface  FISDetailViewController : UIViewController
-@property (nonatomic, strong) FISMovie *seguedMovie;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, strong) FISMovie *movieObject;
 
 -(void)showboatThePicture;
 -(void)displayMovieInfo;
-- (void)updateMovieWithDictionary:(NSDictionary *)desiredDictionary;
 
 @end

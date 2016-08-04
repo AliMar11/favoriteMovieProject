@@ -40,4 +40,6 @@
                           type: (NSString *) type
                           plot: (NSString *) plot;
 
++(void)updateMovieWithDictionary: (FISMovie*)movie :(NSDictionary *)desiredDictionary;
+
 @end

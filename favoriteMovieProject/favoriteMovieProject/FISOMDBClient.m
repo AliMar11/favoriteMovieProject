@@ -92,9 +92,8 @@
     
     [manager GET: OMBDString parameters: nil progress: nil success: ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
-       // NSMutableArray *completeMovieArray = [[NSMutableArray alloc]init];
-        NSMutableDictionary *responseDictionary = [[NSMutableDictionary alloc]init];
-        responseDictionary = [responseObject mutableCopy];
+        NSMutableDictionary *responseDictionary = [[NSMutableDictionary alloc]initWithDictionary: [responseObject mutableCopy]];
+        //responseDictionary = [responseObject mutableCopy];
         
         NSArray *undesiredKeys = [[NSArray alloc]initWithObjects: @"imdbVotes", @"Writer", @"Response", @"totalSeasons", @"Year", @"Metascore", @"Language", @"Country", @"Awards", nil];
         
@@ -114,8 +113,25 @@
 {
     [FISOMDBClient getRepositoriesWithKeyword: nextPageKeyword completion: ^(NSMutableArray *movies)
     {
-        //show the thing ^_^
+
     }];
 }
+
+//+(void)updateMovieWithDictionary: (FISMovie*)movie :(NSDictionary *)desiredDictionary
+//{
+//    NSLog(@"updating the movieObject with detail data");
+//    movie.releaseDate = [desiredDictionary valueForKey: @"Released"];
+//    movie.actors = [desiredDictionary valueForKey: @"Actors"];
+//    movie.director = [desiredDictionary valueForKey: @"Director"];
+//    movie.genre = [desiredDictionary valueForKey: @"Genre"];
+//    movie.plot = [desiredDictionary valueForKey: @"Plot"];
+//    movie.filmRating = [desiredDictionary valueForKey: @"Rated"];
+//    movie.type = [desiredDictionary valueForKey: @"Type"];
+//    movie.imdbScore = [desiredDictionary valueForKey: @"imdbRating"];
+//    movie.imdbID = [desiredDictionary valueForKey: @"imdbID"];
+//    
+//    NSLog(@"UPDATED MOVIE:%@", movie);
+//}
+
 
 @end
