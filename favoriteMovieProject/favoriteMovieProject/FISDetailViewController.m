@@ -12,12 +12,14 @@
 @interface FISDetailViewController ()
 
 @property (strong, nonatomic) FISMovieObjectDataStore *sharedDataStore;
+
+@property (weak, nonatomic) IBOutlet UIImageView *posterPictureView;
 @property (weak, nonatomic) IBOutlet UITextField *typeTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *genreTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *filmRatingTexfield;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextbox;
 @property (weak, nonatomic) IBOutlet UIStackView *textStackView;
-@property (weak, nonatomic) IBOutlet UIButton *moreInfoButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *moreMovieInfoButton;
 
 @end
 
@@ -56,8 +58,7 @@
     //self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
     
     //background and blurEffect Image View setup
-    UIImageView *posterPictureView =[[UIImageView alloc]initWithFrame: CGRectMake(55, 10, 300, 350)];
-    posterPictureView.image = dataAsImage;
+  self.posterPictureView.image = dataAsImage;
     //posterPictureView.translatesAutoresizingMaskIntoConstraints = NO;
     
     UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
@@ -65,17 +66,16 @@
     visualViewBlur.frame = self.view.bounds;
     
     [self.backgroundImageView addSubview: visualViewBlur];
-    [visualViewBlur addSubview: posterPictureView];
+    [visualViewBlur addSubview: self.posterPictureView];
 }
 
 -(void)displayMovieInfo
 {
     NSLog(@"\n\n\nDISPLAY METHOD CALLED\n\n");
-    self.typeTextfield.text = [NSString stringWithFormat: @"  Released:  %@", self.movieObject.releaseDate];
+    self.typeTextfield.text = [NSString stringWithFormat: @"  Released: %@", self.movieObject.releaseDate];
     self.genreTextfield.text = [NSString stringWithFormat: @"  Type:  %@", self.movieObject.type];
-    self.filmRatingTexfield.text = [NSString stringWithFormat:@"  Rating:  %@", self.movieObject.filmRating];
-    self.descriptionTextbox.text = [NSString stringWithFormat: @"Plot:%@",self.movieObject.plot];
-    
+    self.filmRatingTexfield.text = [NSString stringWithFormat:@"  Rating: %@", self.movieObject.filmRating];
+    self.descriptionTextbox.text = [NSString stringWithFormat: @"Plot: %@",self.movieObject.plot];    
     self.typeTextfield.borderStyle = UITextBorderStyleNone;
     self.typeTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
     [self.typeTextfield setBackgroundColor: [UIColor clearColor]];
@@ -85,11 +85,16 @@
     [self.genreTextfield setBackgroundColor: [UIColor clearColor]];
     
     self.filmRatingTexfield.borderStyle = UITextBorderStyleNone;
-    self.filmRatingTexfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
+    self.filmRatingTexfield.font = [UIFont fontWithName:@"System" size: 16.0f];
     [self.filmRatingTexfield setBackgroundColor: [UIColor clearColor]];
     
-    self.descriptionTextbox.font = [UIFont fontWithName:@"Ariel" size:16.0f];
     [self.descriptionTextbox setBackgroundColor: [UIColor clearColor]];
+    self.descriptionTextbox.font = [UIFont fontWithName: @"Verdana" size: 16.0f];
+    self.descriptionTextbox.userInteractionEnabled = YES;
+    self.descriptionTextbox.scrollEnabled = YES;
+    self.descriptionTextbox.showsVerticalScrollIndicator = YES;
+    self.descriptionTextbox.textContainerInset = UIEdgeInsetsMake( 0, 15, 5,  0);
+
 }
 
 -(void)saveMovieObject
@@ -118,12 +123,12 @@
          [self.sharedDataStore saveContext];
      }];
 }
-
--(void)moreInfoButtonTapped
+- (IBAction)moreInfoButtonTapped:(id)sender
 {
     NSLog(@"More information ButttonTapped!");
     [self performSegueWithIdentifier: @"detailInfoSegue" sender: self];
 }
+
 
 #pragma mark- leLook
 

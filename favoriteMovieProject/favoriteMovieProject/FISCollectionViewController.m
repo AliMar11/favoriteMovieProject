@@ -104,7 +104,7 @@
     self.searchBar.placeholder = @"Find movies, TV shows and more...";
     self.searchBar.tintColor = [UIColor blueColor];
     self.searchBar.barTintColor = [UIColor lightGrayColor];
-    self.searchBar.showsSearchResultsButton = YES;
+    //self.searchBar.showsSearchResultsButton = YES;
     self.searchBar.searchResultsButtonSelected = YES;
     
     //search button time!!
@@ -195,16 +195,16 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
                            {
                                
                                dispatch_async(dispatch_get_main_queue(),
-                                              ^{
-                                                  UICollectionViewCell *updateCell = [self.collectionView cellForItemAtIndexPath: indexPath];
+                                ^{
+                                    UICollectionViewCell *updateCell = [self.collectionView cellForItemAtIndexPath: indexPath];
                                                   
-                                                  if (updateCell)
-                                                  {
-                                                      movieImageView.image = movieCVPosterImage;
-                                                      //TODO-UPDATE MOVIE.IMAGE
+                                    if (updateCell)
+                                        {
+                                            movieImageView.image = movieCVPosterImage;
+                                            //TODO-UPDATE MOVIE.IMAGE
                                                       
-                                                  }
-                                              });
+                                        }
+                                });
                            }
                        }
                        
@@ -236,7 +236,7 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
     
     if (kind == UICollectionElementKindSectionFooter)
     {
-        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind: UICollectionElementKindSectionFooter
                                                                                   withReuseIdentifier: @"footerView"
                                                                                          forIndexPath: indexPath];
         reusableView = footerView;

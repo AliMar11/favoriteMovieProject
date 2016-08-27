@@ -39,7 +39,7 @@
                                                                   poster: movieObject[@"Poster"]
                                                                   imdbID: movieObject[@"imdbID"]];
              
-             NSLog(@"\n\nWE HAVE A MOVIE HERE?????\n FISMOVIE:%@\n\n", movieObjectMeat);
+            // NSLog(@"\n\nWE HAVE A MOVIE HERE?????\n FISMOVIE:%@\n\n", movieObjectMeat);
              
              [movies addObject: movieObjectMeat];
          }

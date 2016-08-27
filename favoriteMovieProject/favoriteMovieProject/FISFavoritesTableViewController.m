@@ -113,7 +113,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"\n\nNUMBER OF MOVIES: %li\n\n", self.sharedDatastore.movies.count);
     return self.sharedDatastore.movies.count;
 }
 
@@ -139,8 +138,6 @@
     cell.textLabel.text = aFavoritedMovie.title;
     cell.backgroundColor = [UIColor clearColor];
     
-    // No cell seperators = clean design
-    //tableView.separatorColor = [UIColor clearColor];
     return cell;
 }
 
