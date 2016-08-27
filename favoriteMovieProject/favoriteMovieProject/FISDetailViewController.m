@@ -7,16 +7,19 @@
 
 #import "FISDetailViewController.h"
 #import "FISMovieDetailViewController.h"
+#import "FISOMDBClient.h"
 
 @interface FISDetailViewController ()
 
 @property (strong, nonatomic) FISMovieObjectDataStore *sharedDataStore;
+
+@property (weak, nonatomic) IBOutlet UIImageView *posterPictureView;
 @property (weak, nonatomic) IBOutlet UITextField *typeTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *genreTextfield;
 @property (weak, nonatomic) IBOutlet UITextField *filmRatingTexfield;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextbox;
 @property (weak, nonatomic) IBOutlet UIStackView *textStackView;
-@property (weak, nonatomic) IBOutlet UIButton *moreInfoButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *moreMovieInfoButton;
 
 @end
 
@@ -25,19 +28,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString *titleForNavController = [NSString stringWithFormat: @"%@", self.seguedMovie.title];
+    NSString *titleForNavController = [NSString stringWithFormat: @"%@", self.movieObject.title];
     self.navigationItem.title = titleForNavController;
 
     self.sharedDataStore = [FISMovieObjectDataStore sharedDataStore];
     
     [self createFavoritesTab];
     
-    NSString *imdbID = self.seguedMovie.imdbID;
+    NSString *imdbID = self.movieObject.imdbID;
     [FISOMDBClient getMovieDetailWithMovieID: imdbID completion:^(NSDictionary *desiredDictionary)
      {
         NSLog(@"\n\nWE'VE ENTERED THE GETMOVIEDETAIL RESPONSE \n\ndesiredDictionary:\n%@\n\n", desiredDictionary);
-         [self updateMovieWithDictionary: (NSDictionary*) desiredDictionary];
-         
+ 
+         FISMovie *movie = self.movieObject;
+         [FISMovie updateMovieWithDictionary: movie : desiredDictionary];
+         [self displayMovieInfo];
     } ];
     
     [self showboatThePicture];
@@ -46,61 +51,50 @@
 
 -(void)showboatThePicture
 {
-    NSURL *moviePicture = [[NSURL alloc] initWithString: [self.seguedMovie valueForKey: @"poster"]];
+    NSURL *moviePicture = [[NSURL alloc] initWithString: [self.movieObject valueForKey: @"poster"]];
     NSData *moviePicData = [[NSData alloc]initWithContentsOfURL: moviePicture];
     UIImage *dataAsImage = [[UIImage alloc] initWithData: moviePicData];
     self.backgroundImageView.image = dataAsImage;
+    //self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
     
-    //background Image View setup
-    UIImageView *posterPictureView =[[UIImageView alloc]initWithImage: dataAsImage];
+    //background and blurEffect Image View setup
+  self.posterPictureView.image = dataAsImage;
+    //posterPictureView.translatesAutoresizingMaskIntoConstraints = NO;
     
     UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
     UIVisualEffectView *visualViewBlur = [[UIVisualEffectView alloc] initWithEffect: backgroundBlurEffect];
     visualViewBlur.frame = self.view.bounds;
     
     [self.backgroundImageView addSubview: visualViewBlur];
-    [visualViewBlur addSubview: posterPictureView];
-
-    posterPictureView.translatesAutoresizingMaskIntoConstraints = NO;
-    posterPictureView.preservesSuperviewLayoutMargins = NO;
-    
-    [posterPictureView.topAnchor constraintEqualToAnchor: self.topLayoutGuide.bottomAnchor constant:20].active = YES;
-    [posterPictureView.leadingAnchor constraintEqualToAnchor: visualViewBlur.leadingAnchor constant:60].active = YES;
-    //[posterPictureView.bottomAnchor constraintEqualToAnchor: visualViewBlur.bottomAnchor constant:20].active = YES;
-}
-
-- (void)updateMovieWithDictionary: (NSDictionary *)desiredDictionary
-{
-    NSLog(@"updating the movieObject with detail data");
-    self.seguedMovie.releaseDate = [desiredDictionary valueForKey: @"Released"];
-    self.seguedMovie.actors = [desiredDictionary valueForKey: @"Actors"];
-    self.seguedMovie.director = [desiredDictionary valueForKey: @"Director"];
-    self.seguedMovie.genre = [desiredDictionary valueForKey: @"Genre"];
-    self.seguedMovie.plot = [desiredDictionary valueForKey: @"Plot"];
-    self.seguedMovie.filmRating = [desiredDictionary valueForKey: @"Rated"];
-    self.seguedMovie.type = [desiredDictionary valueForKey: @"Type"];
-    self.seguedMovie.imdbScore = [desiredDictionary valueForKey: @"imdbRating"];
-    self.seguedMovie.imdbID = [desiredDictionary valueForKey: @"imdbID"];
-    
-    NSLog(@"%@", self.seguedMovie);
-    [self displayMovieInfo];
+    [visualViewBlur addSubview: self.posterPictureView];
 }
 
 -(void)displayMovieInfo
 {
     NSLog(@"\n\n\nDISPLAY METHOD CALLED\n\n");
-    self.typeTextfield.text = [NSString stringWithFormat: @"  Released:  %@", self.seguedMovie.releaseDate];
-    self.genreTextfield.text = [NSString stringWithFormat: @"  Type:  %@", self.seguedMovie.type];
-    self.filmRatingTexfield.text = [NSString stringWithFormat:@"  Rating:  %@", self.seguedMovie.filmRating];
-    self.descriptionTextbox.text = [NSString stringWithFormat: @"Plot:%@",self.seguedMovie.plot];
-    
+    self.typeTextfield.text = [NSString stringWithFormat: @"  Released: %@", self.movieObject.releaseDate];
+    self.genreTextfield.text = [NSString stringWithFormat: @"  Type:  %@", self.movieObject.type];
+    self.filmRatingTexfield.text = [NSString stringWithFormat:@"  Rating: %@", self.movieObject.filmRating];
+    self.descriptionTextbox.text = [NSString stringWithFormat: @"Plot: %@",self.movieObject.plot];    
     self.typeTextfield.borderStyle = UITextBorderStyleNone;
     self.typeTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
+    [self.typeTextfield setBackgroundColor: [UIColor clearColor]];
+    
     self.genreTextfield.borderStyle = UITextBorderStyleNone;
     self.genreTextfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
+    [self.genreTextfield setBackgroundColor: [UIColor clearColor]];
+    
     self.filmRatingTexfield.borderStyle = UITextBorderStyleNone;
-    self.filmRatingTexfield.font = [UIFont fontWithName:@"Ariel" size:16.0f];
-    self.descriptionTextbox.font = [UIFont fontWithName:@"Ariel" size:16.0f];
+    self.filmRatingTexfield.font = [UIFont fontWithName:@"System" size: 16.0f];
+    [self.filmRatingTexfield setBackgroundColor: [UIColor clearColor]];
+    
+    [self.descriptionTextbox setBackgroundColor: [UIColor clearColor]];
+    self.descriptionTextbox.font = [UIFont fontWithName: @"Verdana" size: 16.0f];
+    self.descriptionTextbox.userInteractionEnabled = YES;
+    self.descriptionTextbox.scrollEnabled = YES;
+    self.descriptionTextbox.showsVerticalScrollIndicator = YES;
+    self.descriptionTextbox.textContainerInset = UIEdgeInsetsMake( 0, 15, 5,  0);
+
 }
 
 -(void)saveMovieObject
@@ -116,25 +110,25 @@
     newFavoriteMovie.plot = self.descriptionTextbox.text;
     newFavoriteMovie.type = self.typeTextfield.text;
     
-    newFavoriteMovie.actors = self.seguedMovie.actors;
-    newFavoriteMovie.director = self.seguedMovie.director;
-    newFavoriteMovie.imdbScore = self.seguedMovie.imdbScore;
-    newFavoriteMovie.poster = self.seguedMovie.poster;
-    newFavoriteMovie.releaseDate = self.seguedMovie.releaseDate;
-    newFavoriteMovie.runTime = self.seguedMovie.runTime;
-    newFavoriteMovie.imdbID = self.seguedMovie.imdbID;
+    newFavoriteMovie.actors = self.movieObject.actors;
+    newFavoriteMovie.director = self.movieObject.director;
+    newFavoriteMovie.imdbScore = self.movieObject.imdbScore;
+    newFavoriteMovie.poster = self.movieObject.poster;
+    newFavoriteMovie.releaseDate = self.movieObject.releaseDate;
+    newFavoriteMovie.runTime = self.movieObject.runTime;
+    newFavoriteMovie.imdbID = self.movieObject.imdbID;
     
     [[NSOperationQueue mainQueue] addOperationWithBlock:^
      {
          [self.sharedDataStore saveContext];
      }];
 }
-
--(void)moreInfoButtonTapped
+- (IBAction)moreInfoButtonTapped:(id)sender
 {
     NSLog(@"More information ButttonTapped!");
     [self performSegueWithIdentifier: @"detailInfoSegue" sender: self];
 }
+
 
 #pragma mark- leLook
 
@@ -151,7 +145,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     FISMovieDetailViewController *movieTrain = segue.destinationViewController;
-    FISMovie *passedMovie = self.seguedMovie;
+    FISMovie *passedMovie = self.movieObject;
     movieTrain.movie = passedMovie;
 }
 

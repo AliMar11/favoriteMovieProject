@@ -10,7 +10,6 @@
 #import "FISDetailViewController.h"
 #import "FISMovie.h"
 
-
 @interface FISCollectionViewController ()
 
 @property (nonatomic, strong) NSString *keyword;
@@ -19,7 +18,7 @@
 
 @end
 
-@implementation FISCollectionViewController 
+@implementation FISCollectionViewController
 
 - (void)viewDidLoad
 {
@@ -29,9 +28,9 @@
      {
          self.movieCVArray = movies;
          [[NSOperationQueue mainQueue] addOperationWithBlock:^
-         {
-               [self.collectionView reloadData];
-         }];
+          {
+              [self.collectionView reloadData];
+          }];
      }];
     
     [self createSearchBar];
@@ -62,17 +61,17 @@
          self.movieCVArray = movies;
          
          [[NSOperationQueue mainQueue] addOperationWithBlock:
-         ^{
-             [self.collectionView reloadData];
-         }];
+          ^{
+              [self.collectionView reloadData];
+          }];
      }];
 }
 
 - (IBAction)moreMoviesButtonTapped:(id)sender
 {
-   NSString *titleForSearch = [[self.movieCVArray[1] valueForKey: @"title"] stringByReplacingOccurrencesOfString: @" " withString:@"+"];
+    NSString *titleForSearch = [[self.movieCVArray[1] valueForKey: @"title"] stringByReplacingOccurrencesOfString: @" " withString:@"+"];
     NSLog(@"\n\nMOVIEARRAY:%@\n\n", titleForSearch);
-
+    
     self.buttonClickCounter ++;
     
     if (self.buttonClickCounter == 1)
@@ -81,18 +80,17 @@
     }
     
     NSString *nextPage = [NSString stringWithFormat: @"http://www.omdbapi.com/?s=%@&page=%d", titleForSearch, self.buttonClickCounter];
-
-    [FISOMDBClient getRepositoriesWithKeyword: self.keyword
-                                completion:^(NSMutableArray *movies)
-    {
-        NSLog(@"\n\nSUCCESSFUL PAGE 2??:\n%@\n\n", nextPage);
-        [self.movieCVArray addObjectsFromArray: movies];
-    }];
+    
+    [FISOMDBClient getRepositoriesWithKeyword: self.keyword completion: ^(NSMutableArray *movies)
+     {
+         NSLog(@"\n\nSUCCESSFUL PAGE 2??:\n%@\n\n", nextPage);
+         [self.movieCVArray addObjectsFromArray: movies];
+     }];
     
     [[NSOperationQueue mainQueue] addOperationWithBlock:^
-    {
-        [self.collectionView reloadData];
-    }];
+     {
+         [self.collectionView reloadData];
+     }];
 }
 
 #pragma mark <leLook>
@@ -106,7 +104,7 @@
     self.searchBar.placeholder = @"Find movies, TV shows and more...";
     self.searchBar.tintColor = [UIColor blueColor];
     self.searchBar.barTintColor = [UIColor lightGrayColor];
-    self.searchBar.showsSearchResultsButton = YES;
+    //self.searchBar.showsSearchResultsButton = YES;
     self.searchBar.searchResultsButtonSelected = YES;
     
     //search button time!!
@@ -175,23 +173,50 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
 
 - (UICollectionViewCell *)collectionView: (UICollectionView *)collectionView cellForItemAtIndexPath: (NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"awesomeCell"
-                                  forIndexPath: indexPath];
- 
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"awesomeCell"
+                                                                           forIndexPath: indexPath];
+    
     UIImageView *movieImageView = [[UIImageView alloc]init];
     NSDictionary *aMovieCVDictionary= self.movieCVArray[indexPath.row];
-    NSURL *movieCVPosterURL = [[NSURL alloc] initWithString: [aMovieCVDictionary valueForKey: @"_poster"]];
-    NSData *movieCVData = [[NSData alloc] initWithContentsOfURL: movieCVPosterURL];
-    UIImage *movieCVPosterImage = [[UIImage alloc] initWithData: movieCVData];
-    movieImageView.image = movieCVPosterImage;
     
-    if (!movieImageView.image)
-    {
-       movieImageView.image = [UIImage imageNamed: @"missingMilk"];
-    }
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                   
+                   ^{
+                       NSURL *movieCVPosterURL = [[NSURL alloc] initWithString: [aMovieCVDictionary valueForKey: @"_poster"]];
+                       NSData *movieCVData = [[NSData alloc] initWithContentsOfURL: movieCVPosterURL];
+                       
+                       if (movieCVData)
+                       {
+                           UIImage *movieCVPosterImage = [[UIImage alloc] initWithData: movieCVData];
+                           
+                           if (movieCVData)
+                           {
+                               
+                               dispatch_async(dispatch_get_main_queue(),
+                                ^{
+                                    UICollectionViewCell *updateCell = [self.collectionView cellForItemAtIndexPath: indexPath];
+                                                  
+                                    if (updateCell)
+                                        {
+                                            movieImageView.image = movieCVPosterImage;
+                                            //TODO-UPDATE MOVIE.IMAGE
+                                                      
+                                        }
+                                });
+                           }
+                       }
+                       
+                       else {
+                           
+                           movieImageView.image = [UIImage imageNamed: @"missingMilk"];
+                           
+                       }
+                   });
     
     [cell.contentView addSubview: movieImageView];
- 
+    
     movieImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [movieImageView.heightAnchor constraintEqualToAnchor: cell.contentView.heightAnchor].active = YES;
     [movieImageView.widthAnchor constraintEqualToAnchor: cell.contentView.widthAnchor].active = YES;
@@ -211,9 +236,9 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
     
     if (kind == UICollectionElementKindSectionFooter)
     {
-        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                               withReuseIdentifier: @"footerView"
-                                      forIndexPath: indexPath];
+        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind: UICollectionElementKindSectionFooter
+                                                                                  withReuseIdentifier: @"footerView"
+                                                                                         forIndexPath: indexPath];
         reusableView = footerView;
     }
     
@@ -232,7 +257,7 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
     NSIndexPath *indexSelected = self.collectionView.indexPathsForSelectedItems.firstObject;
     FISMovie *movieObjectToBePassed = self.movieCVArray[indexSelected.row];
     
-    movieDataTrain.seguedMovie = movieObjectToBePassed;
+    movieDataTrain.movieObject = movieObjectToBePassed;
     
 }
 #pragma \mark <UICollectionViewDelegate>
@@ -243,12 +268,12 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
  }
  */
 
- // Uncomment this method to specify if the specified item should be selected
+// Uncomment this method to specify if the specified item should be selected
 /*
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
+ {
  return YES;
-}
-*/
+ }
+ */
 
 @end

@@ -10,12 +10,6 @@
 
 @implementation FISMovie : NSObject
 
-//
-//-(void)updateMovie:(NSDictionary *)dictionary {
-//    
-//    self.poster = dictionary[@"poster"];
-//}
-
 -(instancetype) initWithTitle:(NSString*) title
                        poster:(NSString*) poster
                        imdbID:(NSString*) imdbID
@@ -65,5 +59,22 @@
     }
     return self;
 }
+
++(void)updateMovieWithDictionary: (FISMovie*)movie :(NSDictionary *)desiredDictionary
+{
+    NSLog(@"updating the movieObject with detail data");
+    movie.releaseDate = [desiredDictionary valueForKey: @"Released"];
+    movie.actors = [desiredDictionary valueForKey: @"Actors"];
+    movie.director = [desiredDictionary valueForKey: @"Director"];
+    movie.genre = [desiredDictionary valueForKey: @"Genre"];
+    movie.plot = [desiredDictionary valueForKey: @"Plot"];
+    movie.filmRating = [desiredDictionary valueForKey: @"Rated"];
+    movie.type = [desiredDictionary valueForKey: @"Type"];
+    movie.imdbScore = [desiredDictionary valueForKey: @"imdbRating"];
+    movie.imdbID = [desiredDictionary valueForKey: @"imdbID"];
+    
+    NSLog(@"UPDATED MOVIE:%@", movie);
+}
+
 
 @end

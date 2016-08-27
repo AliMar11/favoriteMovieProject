@@ -138,13 +138,14 @@
                                               error: &deleteError];
     [self fetchData];
 }
+
 -(void)deleteOneMovieInstance:(DetailMovieObject*)movieObject
 {
     NSLog(@"\n\nCoreDataMovieObject-->%@\n\n\n", movieObject);
     
     [self.managedObjectContext deleteObject: movieObject];
     NSError *error;
-    if (![self.managedObjectContext save:&error])
+    if (![self.managedObjectContext save: &error])
     {
         // Handle the error.
         NSLog(@"Could not ");
