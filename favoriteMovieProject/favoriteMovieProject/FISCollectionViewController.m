@@ -108,10 +108,12 @@
     self.searchBar.searchResultsButtonSelected = YES;
     
     //search button time!!
-    UIBarButtonItem *searchButton= [[UIBarButtonItem alloc] initWithTitle:@"Search!"
-                                                                    style:UIBarButtonItemStylePlain
-                                                                   target:self
-                                                                   action:@selector(searchButtonTapped)];
+    UIBarButtonItem *searchButton= [[UIBarButtonItem alloc] initWithTitle: nil
+                                                                    style: UIBarButtonItemStylePlain
+                                                                   target: self
+                                                                   action: @selector(searchButtonTapped)];
+    
+    searchButton.image = [UIImage imageNamed: @"Rectangle Stroked-32"];
     self.navigationItem.rightBarButtonItem = searchButton;
 }
 
@@ -202,7 +204,6 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
                                         {
                                             movieImageView.image = movieCVPosterImage;
                                             //TODO-UPDATE MOVIE.IMAGE
-                                                      
                                         }
                                 });
                            }

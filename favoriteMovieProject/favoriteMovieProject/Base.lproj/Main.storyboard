@@ -30,7 +30,7 @@
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" title="MovieCollectionView " id="IX3-ej-5rB" customClass="FISCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" id="sIi-It-VCW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cFI-7N-INf">
                             <size key="itemSize" width="50" height="50"/>
@@ -39,7 +39,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <imageView key="backgroundView" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" id="bOl-cR-1Y3">
-                            <rect key="frame" x="0.0" y="-64" width="414" height="736"/>
+                            <rect key="frame" x="0.0" y="-64" width="600" height="600"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" link="YES" image="YES" selected="YES" allowsDirectInteraction="YES"/>
@@ -60,7 +60,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" contentMode="center" reuseIdentifier="footerView" id="ppy-Oq-s02" customClass="CollectionReusableView">
-                            <rect key="frame" x="0.0" y="114" width="414" height="50"/>
+                            <rect key="frame" x="0.0" y="114" width="600" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVS-ks-xc4">
@@ -92,15 +92,15 @@
             <objects>
                 <tableViewController title="FavoritesTableView Controller" id="edX-cu-M7U" customClass="FISFavoritesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="89" sectionHeaderHeight="28" sectionFooterHeight="28" id="iEF-AU-rC2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailMovieCell" rowHeight="89" id="CIb-PO-cxz">
-                                <rect key="frame" x="0.0" y="92" width="414" height="89"/>
+                            <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="none" indentationWidth="10" reuseIdentifier="detailMovieCell" focusStyle="custom" rowHeight="89" id="CIb-PO-cxz">
+                                <rect key="frame" x="0.0" y="92" width="600" height="89"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CIb-PO-cxz" id="TBf-2O-q0d">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -132,22 +132,22 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="0.0"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wV7-Uo-tie" userLabel="TextStack View">
-                                <rect key="frame" x="0.0" y="451" width="25" height="88"/>
+                                <rect key="frame" x="0.0" y="451" width="35" height="88"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MWn-ff-Wc4" userLabel="Type Textfield">
-                                        <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                        <rect key="frame" x="10" y="0.0" width="25" height="30"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lp6-93-HuH" userLabel="Genre Textfield">
-                                        <rect key="frame" x="0.0" y="29" width="25" height="30"/>
+                                        <rect key="frame" x="10" y="29" width="25" height="30"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WUv-Y2-df1" userLabel="filmRating Texfield">
-                                        <rect key="frame" x="0.0" y="58" width="25" height="30"/>
+                                        <rect key="frame" x="10" y="58" width="25" height="30"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -155,7 +155,7 @@
                                 </subviews>
                                 <edgeInsets key="layoutMargins" top="0.0" left="10" bottom="0.0" right="0.0"/>
                             </stackView>
-                            <textView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" maximumZoomScale="2" keyboardDismissMode="onDrag" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNS-KY-X2H">
+                            <textView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" maximumZoomScale="2" keyboardDismissMode="onDrag" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNS-KY-X2H">
                                 <rect key="frame" x="0.0" y="539" width="414" height="153"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -210,16 +210,16 @@
                                 <exclude reference="qL9-Gd-QUM"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="JHa-hi-U5G"/>
+                                <exclude reference="PVc-Pd-15d"/>
+                                <exclude reference="b0M-dN-Y6I"/>
+                                <exclude reference="ghG-mV-iih"/>
                                 <exclude reference="0H6-m4-4l3"/>
                                 <exclude reference="0Ub-Mc-s61"/>
                                 <exclude reference="DkN-m4-N03"/>
                                 <exclude reference="ebK-c3-Kbq"/>
                                 <exclude reference="ky9-Cv-iaf"/>
                                 <exclude reference="lED-PV-Xfs"/>
-                                <exclude reference="JHa-hi-U5G"/>
-                                <exclude reference="PVc-Pd-15d"/>
-                                <exclude reference="b0M-dN-Y6I"/>
-                                <exclude reference="ghG-mV-iih"/>
                                 <exclude reference="Bhi-c8-OQV"/>
                                 <exclude reference="GtZ-ak-Kos"/>
                                 <exclude reference="RFJ-uY-Z8c"/>
@@ -237,16 +237,16 @@
                                 <include reference="qL9-Gd-QUM"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="JHa-hi-U5G"/>
+                                <include reference="PVc-Pd-15d"/>
+                                <include reference="b0M-dN-Y6I"/>
+                                <include reference="ghG-mV-iih"/>
                                 <include reference="0H6-m4-4l3"/>
                                 <exclude reference="0Ub-Mc-s61"/>
                                 <include reference="DkN-m4-N03"/>
                                 <include reference="ebK-c3-Kbq"/>
                                 <include reference="ky9-Cv-iaf"/>
                                 <include reference="lED-PV-Xfs"/>
-                                <include reference="JHa-hi-U5G"/>
-                                <include reference="PVc-Pd-15d"/>
-                                <include reference="b0M-dN-Y6I"/>
-                                <include reference="ghG-mV-iih"/>
                                 <include reference="Bhi-c8-OQV"/>
                                 <include reference="GtZ-ak-Kos"/>
                                 <include reference="RFJ-uY-Z8c"/>
@@ -398,7 +398,10 @@
         <scene sceneID="a9j-VW-3VB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QI7-dI-Uio" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="search" id="1C4-hq-DfO"/>
+                    <tabBarItem key="tabBarItem" image="Thumbnails-50" id="1C4-hq-DfO">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-8"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-40"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VFo-en-pWI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -417,7 +420,10 @@
         <scene sceneID="BrK-Ap-6GG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rGV-22-zBE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="mZx-Ae-VDT"/>
+                    <tabBarItem key="tabBarItem" image="Star-40" id="mZx-Ae-VDT">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-7"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MZi-v0-5Jg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -433,4 +439,8 @@
             <point key="canvasLocation" x="492" y="811"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Star-40" width="40" height="40"/>
+        <image name="Thumbnails-50" width="50" height="50"/>
+    </resources>
 </document>

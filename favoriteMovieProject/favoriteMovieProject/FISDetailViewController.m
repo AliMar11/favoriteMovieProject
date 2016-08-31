@@ -36,7 +36,7 @@
     [self createFavoritesTab];
     
     NSString *imdbID = self.movieObject.imdbID;
-    [FISOMDBClient getMovieDetailWithMovieID: imdbID completion:^(NSDictionary *desiredDictionary)
+    [FISOMDBClient getMovieDetailWithMovieID: imdbID completion: ^(NSDictionary *desiredDictionary)
      {
         NSLog(@"\n\nWE'VE ENTERED THE GETMOVIEDETAIL RESPONSE \n\ndesiredDictionary:\n%@\n\n", desiredDictionary);
  
@@ -55,11 +55,10 @@
     NSData *moviePicData = [[NSData alloc]initWithContentsOfURL: moviePicture];
     UIImage *dataAsImage = [[UIImage alloc] initWithData: moviePicData];
     self.backgroundImageView.image = dataAsImage;
-    //self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
     
-    //background and blurEffect Image View setup
+    
+#pragma mark- background and blurEffect setup
   self.posterPictureView.image = dataAsImage;
-    //posterPictureView.translatesAutoresizingMaskIntoConstraints = NO;
     
     UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
     UIVisualEffectView *visualViewBlur = [[UIVisualEffectView alloc] initWithEffect: backgroundBlurEffect];
@@ -99,8 +98,6 @@
 
 -(void)saveMovieObject
 {
-    NSLog(@"\n\nEntered savingFavMovie Method\n\n");
-    
     DetailMovieObject *newFavoriteMovie = [NSEntityDescription insertNewObjectForEntityForName: @"MovieObject" inManagedObjectContext: self.sharedDataStore.managedObjectContext];
     
     newFavoriteMovie.title = self.navigationItem.title;
@@ -134,10 +131,12 @@
 
 -(void)createFavoritesTab
 {
-    UIBarButtonItem *favortiesTab = [[UIBarButtonItem alloc] initWithTitle: @"Favs"
-                                                                        style: UIBarButtonItemStyleDone
-                                                                       target: self
-                                                                       action: @selector(saveMovieObject)];
+    UIBarButtonItem *favortiesTab = [[UIBarButtonItem alloc] initWithTitle: nil
+                                                                     style: UIBarButtonItemStyleDone
+                                                                    target: self
+                                                                    action: @selector(saveMovieObject)];
+    
+    favortiesTab.image = [UIImage imageNamed: @"Add to Favorites-51"];
     self.navigationItem.rightBarButtonItem = favortiesTab;
 }
 

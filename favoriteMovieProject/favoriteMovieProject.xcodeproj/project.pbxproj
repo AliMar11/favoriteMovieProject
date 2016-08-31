@@ -11,7 +11,6 @@
 		2B0390C91CE127660060EAB8 /* FISOMDBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B0390C81CE127660060EAB8 /* FISOMDBClient.m */; };
 		2B05ED3D1D17BADC00FD37A5 /* FISMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B05ED3C1D17BADC00FD37A5 /* FISMovie.m */; };
 		2B0DE60B1D2EB787003609C1 /* FavoriteMovieProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B0DE6091D2EB787003609C1 /* FavoriteMovieProject.xcdatamodeld */; };
-		2B389BAB1D70A7020072A8EB /* FIStabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B389BAA1D70A7020072A8EB /* FIStabBarController.m */; };
 		2B79BB9B1D18B5EE0025759A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CAF01CD8010200F2781C /* main.m */; };
 		2B79BB9C1D18B68E0025759A /* FISFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB101CD8048300F2781C /* FISFavoritesTableViewController.m */; };
 		2B79BB9D1D18B6980025759A /* FISCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB0D1CD803A700F2781C /* FISCollectionViewController.m */; };
@@ -34,8 +33,6 @@
 		2B05ED3B1D17BADC00FD37A5 /* FISMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISMovie.h; sourceTree = "<group>"; };
 		2B05ED3C1D17BADC00FD37A5 /* FISMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISMovie.m; sourceTree = "<group>"; };
 		2B0DE60A1D2EB787003609C1 /* FavoriteMovieProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteMovieProject.xcdatamodel; sourceTree = "<group>"; };
-		2B389BA91D70A7020072A8EB /* FIStabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIStabBarController.h; sourceTree = "<group>"; };
-		2B389BAA1D70A7020072A8EB /* FIStabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIStabBarController.m; sourceTree = "<group>"; };
 		2B79BBA11D1B36460025759A /* FISDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISDetailViewController.h; sourceTree = "<group>"; };
 		2B79BBA21D1B36460025759A /* FISDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISDetailViewController.m; sourceTree = "<group>"; };
 		2B98CAEC1CD8010200F2781C /* favoriteMovieProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favoriteMovieProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,8 +108,6 @@
 				2B05ED3C1D17BADC00FD37A5 /* FISMovie.m */,
 				2B98CAF21CD8010200F2781C /* FISAppDelegate.h */,
 				2B98CAF31CD8010200F2781C /* FISAppDelegate.m */,
-				2B389BA91D70A7020072A8EB /* FIStabBarController.h */,
-				2B389BAA1D70A7020072A8EB /* FIStabBarController.m */,
 				2B0390C71CE127660060EAB8 /* FISOMDBClient.h */,
 				2B0390C81CE127660060EAB8 /* FISOMDBClient.m */,
 				1BE3467B1D10724B005A502E /* FISMovieObjectDataStore.h */,
@@ -287,7 +282,6 @@
 				2B05ED3D1D17BADC00FD37A5 /* FISMovie.m in Sources */,
 				2B79BB9C1D18B68E0025759A /* FISFavoritesTableViewController.m in Sources */,
 				2B79BBA31D1B36460025759A /* FISDetailViewController.m in Sources */,
-				2B389BAB1D70A7020072A8EB /* FIStabBarController.m in Sources */,
 				2B0390C91CE127660060EAB8 /* FISOMDBClient.m in Sources */,
 				2B79BB9D1D18B6980025759A /* FISCollectionViewController.m in Sources */,
 				2B98CAF41CD8010200F2781C /* FISAppDelegate.m in Sources */,

@@ -25,7 +25,7 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"detailMovieCell"];
     
     [self deleteFavoriteMoviesButton];
-    [self setUpTheImage];
+    [self setUpTableBackgroundView];
     
     // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
@@ -84,24 +84,21 @@
                                                                            style:UIBarButtonItemStylePlain
                                                                           target: self
                                                                           action: @selector(deleteAllTheThings)];
-    self.navigationItem.leftBarButtonItem = deleteAllFavorites;
+    self.navigationItem.rightBarButtonItem = deleteAllFavorites;
 }
 
 #pragma mark -leLook
--(void)setUpTheImage
+-(void)setUpTableBackgroundView
 {
-    UIImageView *backgroundView = [[UIImageView alloc] init];
-    backgroundView.image = [UIImage imageNamed: @"star3"];
-    backgroundView.frame = self.view.bounds;
-    
-    [self.view addSubview: backgroundView];
-    
+    UIImageView *tableViewBackground = [[UIImageView alloc] init];
+    tableViewBackground.image = [UIImage imageNamed: @"star3"];
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
     UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect: blurEffect];
-    blurEffectView.frame = self.view.bounds;
-    [backgroundView addSubview: blurEffectView];
-    backgroundView.layer.zPosition = -5;
+    //blurEffectView.backgroundColor = [UIColor clearColor];
     
+    self.tableView.backgroundView = tableViewBackground;
+    blurEffectView.frame = self.tableView.bounds;
+    [tableViewBackground addSubview: blurEffectView];
 }
 
 #pragma mark - Table view data source
@@ -130,14 +127,10 @@
     
     cell.imageView.image = posterPicImage;
     cell.imageView.clipsToBounds = YES;
-    
-    //cell.contentMode = UIViewContentModeScaleAspectFill;
-    //self.tableView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    
     cell.textLabel.text = aFavoritedMovie.title;
     cell.backgroundColor = [UIColor clearColor];
-    
+    //cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
+
     return cell;
 }
 
