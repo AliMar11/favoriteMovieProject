@@ -20,7 +20,5 @@
 + (void)getRepositoriesWithKeyword: (NSString *)keyword completion:(void (^)(NSMutableArray * movies))getMethCompletion;
 + (void)randomContentSearchWithCompletion:(void (^)(NSMutableArray * movies))getMethCompletion;
 + (void)getMovieDetailWithMovieID: (NSString *)imdbID completion:(void (^)(NSDictionary *desiredDictionary))getMethCompletion;
-//+(void)updateMovieWithDictionary: (FISMovie*)movie :(NSDictionary *)desiredDictionary;
-
 
 @end

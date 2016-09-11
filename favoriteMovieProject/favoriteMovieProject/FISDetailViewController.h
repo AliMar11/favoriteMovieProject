@@ -6,6 +6,7 @@
 //  Copyright © 2016 Alicia Marisal. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "FISMovie.h"
 #import "DetailMovieObject.h"
 #import "FISMovieObjectDataStore.h"
@@ -15,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, strong) FISMovie *movieObject;
 
--(void)showboatThePicture;
+-(void)setUpBackgroundView;
 -(void)displayMovieInfo;
 
 @end

@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *keyword;
 @property (assign) int buttonClickCounter;
 @property (nonatomic, strong) UIStoryboardSegue *detailCellSegue;
+@property (nonatomic, strong) FISMovieObjectDataStore *sharedDatastore;
 
 @end
 
@@ -23,6 +24,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.sharedDatastore = [FISMovieObjectDataStore sharedDataStore];
     
     [FISOMDBClient randomContentSearchWithCompletion: ^(NSMutableArray *movies)
      {
@@ -36,28 +39,17 @@
     [self createSearchBar];
     [self createBlurView];
     
-    //***set constraints for backroundVC For CollectionVC image
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    //***get more info on how this works
-    // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class]
             forCellWithReuseIdentifier: @"awesomeCell"];
 }
 
 -(void)searchButtonTapped
 {
-    NSLog(@"THE SEARCH BUTTON WAS TAPPED");
-    
     [self.movieCVArray removeAllObjects];
     self.keyword = [self.searchBar.text stringByReplacingOccurrencesOfString: @" " withString: @"+"];
     
     [FISOMDBClient getRepositoriesWithKeyword:self.keyword completion: ^(NSMutableArray *movies)
      {
-         NSLog(@"SEARCH RESPOSE:\n%@", movies);
-         NSLog(@"the keyword used with 'search' button tap:%@", self.keyword);
          self.movieCVArray = movies;
          
          [[NSOperationQueue mainQueue] addOperationWithBlock:
@@ -69,9 +61,6 @@
 
 - (IBAction)moreMoviesButtonTapped:(id)sender
 {
-    NSString *titleForSearch = [[self.movieCVArray[1] valueForKey: @"title"] stringByReplacingOccurrencesOfString: @" " withString:@"+"];
-    NSLog(@"\n\nMOVIEARRAY:%@\n\n", titleForSearch);
-    
     self.buttonClickCounter ++;
     
     if (self.buttonClickCounter == 1)
@@ -79,11 +68,8 @@
         self.buttonClickCounter = 2;
     }
     
-    NSString *nextPage = [NSString stringWithFormat: @"http://www.omdbapi.com/?s=%@&page=%d", titleForSearch, self.buttonClickCounter];
-    
     [FISOMDBClient getRepositoriesWithKeyword: self.keyword completion: ^(NSMutableArray *movies)
      {
-         NSLog(@"\n\nSUCCESSFUL PAGE 2??:\n%@\n\n", nextPage);
          [self.movieCVArray addObjectsFromArray: movies];
      }];
     
@@ -93,8 +79,7 @@
      }];
 }
 
-#pragma mark <leLook>
-
+#pragma mark <VC visualSetup>
 -(void)createSearchBar
 {
     self.searchBar = [[UISearchBar alloc] init];
@@ -104,10 +89,8 @@
     self.searchBar.placeholder = @"Find movies, TV shows and more...";
     self.searchBar.tintColor = [UIColor blueColor];
     self.searchBar.barTintColor = [UIColor lightGrayColor];
-    //self.searchBar.showsSearchResultsButton = YES;
     self.searchBar.searchResultsButtonSelected = YES;
-    
-    //search button time!!
+   
     UIBarButtonItem *searchButton= [[UIBarButtonItem alloc] initWithTitle: nil
                                                                     style: UIBarButtonItemStylePlain
                                                                    target: self
@@ -175,46 +158,51 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
 
 - (UICollectionViewCell *)collectionView: (UICollectionView *)collectionView cellForItemAtIndexPath: (NSIndexPath *)indexPath
 {
+
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: @"awesomeCell"
                                                                            forIndexPath: indexPath];
-    
+ 
+    [[[cell contentView] subviews] makeObjectsPerformSelector: @selector(removeFromSuperview)];
+
     UIImageView *movieImageView = [[UIImageView alloc]init];
-    NSDictionary *aMovieCVDictionary= self.movieCVArray[indexPath.row];
+    NSMutableDictionary *aMovieCVDictionary= self.movieCVArray[indexPath.row];
     
+                       if ([[self.movieCVArray[indexPath.row] valueForKey: @"poster"] isKindOfClass: [UIImage class]])
+                       {
+                           movieImageView.image = [self.movieCVArray[indexPath.row] valueForKey: @"poster"];
+                       }
     
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-                   
-                   ^{
-                       NSURL *movieCVPosterURL = [[NSURL alloc] initWithString: [aMovieCVDictionary valueForKey: @"_poster"]];
+                      else
+                      {
+                        
+                       NSURL *movieCVPosterURL = [[NSURL alloc] initWithString: [aMovieCVDictionary valueForKey: @"poster"]];
                        NSData *movieCVData = [[NSData alloc] initWithContentsOfURL: movieCVPosterURL];
                        
-                       if (movieCVData)
-                       {
-                           UIImage *movieCVPosterImage = [[UIImage alloc] initWithData: movieCVData];
-                           
                            if (movieCVData)
                            {
+                               UIImage *movieCVPosterImage = [[UIImage alloc] initWithData: movieCVData];
                                
                                dispatch_async(dispatch_get_main_queue(),
                                 ^{
-                                    UICollectionViewCell *updateCell = [self.collectionView cellForItemAtIndexPath: indexPath];
-                                                  
-                                    if (updateCell)
+                                    if (cell)
                                         {
                                             movieImageView.image = movieCVPosterImage;
-                                            //TODO-UPDATE MOVIE.IMAGE
+                                            [self.movieCVArray[indexPath.row] setValue: movieImageView.image forKey: @"poster"];
                                         }
                                 });
                            }
-                       }
                        
-                       else {
-                           
-                           movieImageView.image = [UIImage imageNamed: @"missingMilk"];
-                           
+                       else
+                       {
+                           dispatch_async(dispatch_get_main_queue(),
+                            ^{
+                                movieImageView.image =  [UIImage imageNamed: @"Ios Application Placeholder Filled-100 (2)"];
+                                movieImageView.clipsToBounds = YES;
+                                
+                           [self.movieCVArray[indexPath.row] setValue: movieImageView.image forKey: @"poster"];
+                            });
                        }
-                   });
+                    }
     
     [cell.contentView addSubview: movieImageView];
     
@@ -223,7 +211,7 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
     [movieImageView.widthAnchor constraintEqualToAnchor: cell.contentView.widthAnchor].active = YES;
     [movieImageView.centerXAnchor constraintEqualToAnchor: cell.contentView.centerXAnchor].active =YES;
     [movieImageView.centerYAnchor constraintEqualToAnchor: cell.contentView.centerYAnchor].active =YES;
-    [movieImageView setContentMode: UIViewContentModeScaleAspectFill];
+    [movieImageView setContentMode: UIViewContentModeScaleToFill];
     movieImageView.clipsToBounds = YES;
     
     return cell;
@@ -259,22 +247,6 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section
     FISMovie *movieObjectToBePassed = self.movieCVArray[indexSelected.row];
     
     movieDataTrain.movieObject = movieObjectToBePassed;
-    
 }
-#pragma \mark <UICollectionViewDelegate>
-/*
- // Uncomment this method to specify if the specified item should be highlighted during tracking
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
- }
- */
-
-// Uncomment this method to specify if the specified item should be selected
-/*
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
- {
- return YES;
- }
- */
 
 @end

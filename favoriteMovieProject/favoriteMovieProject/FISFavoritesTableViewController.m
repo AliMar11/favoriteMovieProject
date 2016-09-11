@@ -19,16 +19,12 @@
 {
     [super viewDidLoad];
     
-    
     self.sharedDatastore = [FISMovieObjectDataStore sharedDataStore];
     [self.sharedDatastore fetchData];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier: @"detailMovieCell"];
     
-    [self deleteFavoriteMoviesButton];
+    [self createDeleteAllFavoritesButton];
     [self setUpTableBackgroundView];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    //self.clearsSelectionOnViewWillAppear = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -40,7 +36,6 @@
 
 -(void)deleteAllTheThings
 {
-    
     UIAlertController *areYouSureController = [UIAlertController alertControllerWithTitle:@"Warning:"
                                                                                   message:@"Are you sure you want to delete your favorites folder?" preferredStyle: UIAlertControllerStyleAlert];
     
@@ -78,7 +73,8 @@
     [self.sharedDatastore deleteOneMovieInstance: movieObject];
 }
 
--(void)deleteFavoriteMoviesButton
+#pragma mark <VC visualSetup>
+-(void)createDeleteAllFavoritesButton
 {
     UIBarButtonItem *deleteAllFavorites = [[UIBarButtonItem alloc] initWithTitle: @"Delete All"
                                                                            style:UIBarButtonItemStylePlain
@@ -87,14 +83,12 @@
     self.navigationItem.rightBarButtonItem = deleteAllFavorites;
 }
 
-#pragma mark -leLook
 -(void)setUpTableBackgroundView
 {
     UIImageView *tableViewBackground = [[UIImageView alloc] init];
     tableViewBackground.image = [UIImage imageNamed: @"star3"];
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
     UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect: blurEffect];
-    //blurEffectView.backgroundColor = [UIColor clearColor];
     
     self.tableView.backgroundView = tableViewBackground;
     blurEffectView.frame = self.tableView.bounds;
@@ -102,7 +96,6 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -119,18 +112,12 @@
     
     NSArray *favoritedMovies = self.sharedDatastore.movies;
     FISMovie *aFavoritedMovie = favoritedMovies[indexPath.row];
-    
-    NSLog(@"\n\nFISMOVIE OBJECT:\n%@\n\n", aFavoritedMovie.poster);
-    NSURL *NSURLPic = [NSURL URLWithString: aFavoritedMovie.poster];
-    NSData *picData = [[NSData alloc] initWithContentsOfURL: NSURLPic];
-    UIImage *posterPicImage = [UIImage imageWithData: picData];
-    
+   
+    UIImage *posterPicImage = [[UIImage alloc] initWithData: [aFavoritedMovie valueForKey: @"poster"]];
     cell.imageView.image = posterPicImage;
     cell.imageView.clipsToBounds = YES;
     cell.textLabel.text = aFavoritedMovie.title;
     cell.backgroundColor = [UIColor clearColor];
-    //cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
-
     return cell;
 }
 

@@ -15,6 +15,7 @@
 		2B79BB9C1D18B68E0025759A /* FISFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB101CD8048300F2781C /* FISFavoritesTableViewController.m */; };
 		2B79BB9D1D18B6980025759A /* FISCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CB0D1CD803A700F2781C /* FISCollectionViewController.m */; };
 		2B79BBA31D1B36460025759A /* FISDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B79BBA21D1B36460025759A /* FISDetailViewController.m */; };
+		2B945B5E1D7CF2E1002727FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B945B5D1D7CF2E1002727FE /* QuartzCore.framework */; };
 		2B98CAF41CD8010200F2781C /* FISAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B98CAF31CD8010200F2781C /* FISAppDelegate.m */; };
 		2B98CAFA1CD8010200F2781C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B98CAF81CD8010200F2781C /* Main.storyboard */; };
 		2B98CAFF1CD8010200F2781C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B98CAFE1CD8010200F2781C /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		2B0DE60A1D2EB787003609C1 /* FavoriteMovieProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteMovieProject.xcdatamodel; sourceTree = "<group>"; };
 		2B79BBA11D1B36460025759A /* FISDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FISDetailViewController.h; sourceTree = "<group>"; };
 		2B79BBA21D1B36460025759A /* FISDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FISDetailViewController.m; sourceTree = "<group>"; };
+		2B945B5D1D7CF2E1002727FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2B98CAEC1CD8010200F2781C /* favoriteMovieProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = favoriteMovieProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B98CAF01CD8010200F2781C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2B98CAF21CD8010200F2781C /* FISAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FISAppDelegate.h; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60B20F281DA3C287BE17B562 /* libPods-favoriteMovieProject.a in Frameworks */,
+				2B945B5E1D7CF2E1002727FE /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +152,7 @@
 		CD47814F11A3CDD968DC24E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B945B5D1D7CF2E1002727FE /* QuartzCore.framework */,
 				82EF284756F8B859ADC1BB41 /* libPods-favoriteMovieProject.a */,
 			);
 			name = Frameworks;

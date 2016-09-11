@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "FISOMDBClient.h"
+#import "FISMovieObjectDataStore.h"
 
 @interface FISCollectionViewController : UICollectionViewController <UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 

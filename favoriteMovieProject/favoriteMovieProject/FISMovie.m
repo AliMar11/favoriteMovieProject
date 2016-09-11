@@ -72,8 +72,8 @@
     movie.type = [desiredDictionary valueForKey: @"Type"];
     movie.imdbScore = [desiredDictionary valueForKey: @"imdbRating"];
     movie.imdbID = [desiredDictionary valueForKey: @"imdbID"];
+    movie.runTime = [desiredDictionary valueForKey: @"Runtime"];
     
-    NSLog(@"UPDATED MOVIE:%@", movie);
 }
 
 

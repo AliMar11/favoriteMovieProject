@@ -31,10 +31,11 @@
     [self setUpTheImage];
 }
 
-#pragma mark- leLook
-
+#pragma mark <VC visualSetup>
 -(void)setUpTheOutlets
 {
+    dispatch_async(dispatch_get_main_queue(),
+    ^{
     self.directorTextField.text = [NSString stringWithFormat: @" Director: %@", self.movie.director];
     self.actorsTextField.text = [NSString stringWithFormat: @" Actors: %@", self.movie.actors];
     self.genreTextField.text = [NSString stringWithFormat: @" Genre: %@", self.movie.genre];
@@ -43,16 +44,14 @@
     self.releaseDateTextField.text = [NSString stringWithFormat: @" Date of Release: %@", self.movie.releaseDate];
     self.runTimeTextField.text = [NSString stringWithFormat: @" Runtime: %@", self.movie.runTime];
     self.typeTextField.text = [NSString stringWithFormat: @" Entertaiment Type: %@", self.movie.type];
-    self.plotTextView.text = [NSString stringWithFormat: @" Plot: %@", self.movie.plot];
+    self.plotTextView.text = [NSString stringWithFormat: @"Plot: %@", self.movie.plot];
+  
+    });
 }
 
 -(void)setUpTheImage
 {
-    NSURL *posterURL = [[NSURL alloc] initWithString: self.movie.poster];
-    NSData *posterData = [[NSData alloc]initWithContentsOfURL: posterURL];
-    UIImage *posterImage = [[UIImage alloc] initWithData: posterData];
-    
-    UIImageView *backgroundPicture = [[UIImageView alloc] initWithImage: posterImage];
+    UIImageView *backgroundPicture = [[UIImageView alloc] initWithImage: [self.movie valueForKey: @"poster"]];
     backgroundPicture.frame = self.view.bounds;
     UIBlurEffect *backgroundBlurEffect = [UIBlurEffect effectWithStyle: UIBlurEffectStyleLight];
     UIVisualEffectView *visualViewBlur = [[UIVisualEffectView alloc] initWithEffect: backgroundBlurEffect];
@@ -81,16 +80,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

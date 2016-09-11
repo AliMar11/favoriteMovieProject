@@ -84,9 +84,7 @@
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType configuration: nil URL: storeURL options: nil error: &error])
-    {
-        // Report any error.
-        
+    {        
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
         dict[NSLocalizedFailureReasonErrorKey] = failureReason;
@@ -122,7 +120,6 @@
 
 -(void)fetchData
 {
-    NSLog(@"\n\nFETCHING SOME YUMMY DATA!\n\n");
     NSFetchRequest *favoriteMoviesArray = [NSFetchRequest fetchRequestWithEntityName: @"MovieObject"];
     self.movies = [self.managedObjectContext executeFetchRequest: favoriteMoviesArray error: nil];
 }
@@ -148,7 +145,7 @@
     if (![self.managedObjectContext save: &error])
     {
         // Handle the error.
-        NSLog(@"Could not ");
+        NSLog(@"Could not delete a movieObject - error at managedObject level");
     }
     
     [self saveContext];

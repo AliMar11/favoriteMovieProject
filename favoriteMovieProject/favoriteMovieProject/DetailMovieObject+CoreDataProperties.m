@@ -2,7 +2,7 @@
 //  DetailMovieObject+CoreDataProperties.m
 //  favoriteMovieProject
 //
-//  Created by Alicia Marisal on 7/28/16.
+//  Created by Alicia Marisal on 9/8/16.
 //  Copyright © 2016 Alicia Marisal. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,6 +17,7 @@
 @dynamic director;
 @dynamic filmRating;
 @dynamic genre;
+@dynamic imdbID;
 @dynamic imdbScore;
 @dynamic plot;
 @dynamic poster;
@@ -24,6 +25,5 @@
 @dynamic runTime;
 @dynamic title;
 @dynamic type;
-@dynamic imdbID;
 
 @end
