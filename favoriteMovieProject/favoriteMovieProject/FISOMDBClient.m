@@ -61,7 +61,6 @@
         
         for (NSDictionary *movieObject in movieArray)
         {
-            NSLog(@"inside For loop!");
             FISMovie *movieObjectMeat = [[FISMovie alloc] initWithTitle: movieObject[@"Title"]
                                                                  poster: movieObject[@"Poster"]
                                                                  imdbID: movieObject[@"imdbID"]];
@@ -91,9 +90,6 @@
         [responseDictionary removeObjectsForKeys: undesiredKeys];
         NSDictionary *desiredDictionary = [[NSDictionary alloc] initWithDictionary: responseDictionary];
 
-        
-        NSLog(@"\n\nRESPONSE OBJECT:\n%@\n\n\n\n RESPONSEDICTIONARY:%@\n\n@", responseObject,responseDictionary);
-        
         getMethCompletion(desiredDictionary);
     }
                failure: ^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)

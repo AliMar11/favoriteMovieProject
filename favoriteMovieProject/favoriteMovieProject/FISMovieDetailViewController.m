@@ -25,7 +25,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"MOVIE:\n%@", self.movie);
     
     [self setUpTheOutlets];
     [self setUpTheImage];

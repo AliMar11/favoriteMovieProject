@@ -138,8 +138,6 @@
 
 -(void)deleteOneMovieInstance:(DetailMovieObject*)movieObject
 {
-    NSLog(@"\n\nCoreDataMovieObject-->%@\n\n\n", movieObject);
-    
     [self.managedObjectContext deleteObject: movieObject];
     NSError *error;
     if (![self.managedObjectContext save: &error])

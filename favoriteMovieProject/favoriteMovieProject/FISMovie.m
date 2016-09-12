@@ -62,7 +62,6 @@
 
 +(void)updateMovieWithDictionary: (FISMovie*)movie :(NSDictionary *)desiredDictionary
 {
-    NSLog(@"updating the movieObject with detail data");
     movie.releaseDate = [desiredDictionary valueForKey: @"Released"];
     movie.actors = [desiredDictionary valueForKey: @"Actors"];
     movie.director = [desiredDictionary valueForKey: @"Director"];
