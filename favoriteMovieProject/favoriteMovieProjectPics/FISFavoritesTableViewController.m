@@ -118,6 +118,7 @@
     cell.imageView.clipsToBounds = YES;
     cell.textLabel.text = aFavoritedMovie.title;
     cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -133,6 +134,7 @@
 
 -(void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         DetailMovieObject *movieObject = self.sharedDatastore.movies[indexPath.row];

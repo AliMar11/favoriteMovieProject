@@ -2,7 +2,7 @@
 //  DetailMovieObject+CoreDataProperties.m
 //  favoriteMovieProject
 //
-//  Created by Alicia Marisal on 9/8/16.
+//  Created by Alicia Marisal on 9/20/16.
 //  Copyright © 2016 Alicia Marisal. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

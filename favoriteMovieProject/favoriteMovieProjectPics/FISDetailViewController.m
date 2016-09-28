@@ -94,6 +94,11 @@
 
 -(void)saveMovieObject
 {
+   // NSEntityDescription.insertNewObjectForEntityForName(_:inManagedObjectContext:)
+    
+   // DetailMovieObject *newFavoriteMovie = [NSEntityDescription insertNewObjectForEntityForName: @"MovieObject" inManagedObjectContext: self.sharedDataStore.managedObjectContext];
+    
+    
     DetailMovieObject *newFavoriteMovie = [NSEntityDescription insertNewObjectForEntityForName: @"MovieObject" inManagedObjectContext: self.sharedDataStore.managedObjectContext];
     
     newFavoriteMovie.title = self.navigationItem.title;

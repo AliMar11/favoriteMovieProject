@@ -41,6 +41,8 @@
     
     if (_managedObjectContext != nil)
     {
+        //self.managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+
         return _managedObjectContext;
     }
     
@@ -51,7 +53,12 @@
     }
     _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
     
+   // self.managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+    
     [_managedObjectContext setPersistentStoreCoordinator: coordinator];
+    
+    self.managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+    
     return _managedObjectContext;
 }
 
@@ -67,6 +74,7 @@
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource: @"FavoriteMovieProject" withExtension: @"momd"];
     
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL: modelURL];
+    
     return _managedObjectModel;
 }
 
@@ -103,18 +111,28 @@
 
 -(void)saveContext
 {
+    
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+
     if (managedObjectContext != nil)
     {
         NSError *error = nil;
+     //   NSError *mergeError = NSErrorMergePolicy;
+        BOOL success = [managedObjectContext save:&error];
+        if (!success)
+        {
+            NSLog(@"We have a real saving error if 'success' = NO;");
+        }
         if ([managedObjectContext hasChanges] && ![managedObjectContext save: &error])
         {
+            NSLog(@"MANAGED OBJ HAS CHANGE OR NOT SAVE &error");
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            
+           // self.managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
            // abort();
         }
+
     }
 }
 
@@ -142,7 +160,7 @@
     NSError *error;
     if (![self.managedObjectContext save: &error])
     {
-        // Handle the error.
+        // Incorporate real error handling.
         NSLog(@"Could not delete a movieObject - error at managedObject level");
     }
     
