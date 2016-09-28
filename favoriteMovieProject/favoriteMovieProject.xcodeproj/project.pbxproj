@@ -126,7 +126,6 @@
 				2BF0844D1D9AA80A00D25A7A /* FISFavoritesTableViewController.m */,
 				2B0394571D9AB40D00A54FF2 /* LaunchScreen.storyboard */,
 				2B0394591D9AB40D00A54FF2 /* Main.storyboard */,
-				2B03945F1D9AB53000A54FF2 /* Info.plist */,
 				2BF084611D9AAB8C00D25A7A /* Assets.xcassets */,
 				2B98CAEF1CD8010200F2781C /* Supporting Files */,
 			);
@@ -136,6 +135,7 @@
 		2B98CAEF1CD8010200F2781C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2B03945F1D9AB53000A54FF2 /* Info.plist */,
 				2BF0845F1D9AAB3900D25A7A /* main.m */,
 			);
 			name = "Supporting Files";
